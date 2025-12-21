@@ -1,7 +1,8 @@
 @tool
 extends CanvasLayer
 
-
+@export
+var local: Node
 @export
 var window: Window
 @export
@@ -56,6 +57,7 @@ func _ready():
 ## func _on_idle_frame() -> void:
 func _process(delta: float) -> void:
 	if window.visible:
+		tips.pivot_offset = tips.size / 2
 		if curr_camera == null or !is_instance_valid(curr_camera) or !curr_camera.is_current():
 			curr_camera = null
 		_check_camer_timer -= delta
@@ -95,9 +97,9 @@ func _process(delta: float) -> void:
 						return
 					elif _selected_list.size() > 1: # and _tips_finish_count < 5: # 最多提示 5 次
 						if p == "macOS":
-							tips.text = "错过了选中的节点？\n按住Command在点击鼠标左键可以回溯选择的节点！"
+							tips.text = local.get_str("missed_the_selected_node_mac")
 						else:
-							tips.text = "错过了选中的节点？\n按住Ctrl在点击鼠标左键可以回溯选择的节点！"
+							tips.text = local.get_str("missed_the_selected_node_win")
 						tips_anim.play("show")
 						
 		else:

@@ -159,7 +159,8 @@ func _jump_to_node(path: String) -> void:
 			debug_tool.inspector.set_view_node(node)
 	else:
 		# 没有找到节点，输出日志
-		debug_tool.tips.text = "无法找到路径为 '" + path + "' 的节点"
+		# debug_tool.tips.text = "无法找到路径为 '" + path + "' 的节点"
+		debug_tool.tips.text = debug_tool.local.get_str_replace1("unable_to_find_node_with_path_0", path)
 		debug_tool.tips_anim.play("show")
 		print("ExcludeList: 无法找到路径为 '", path, "' 的节点")
 	pass

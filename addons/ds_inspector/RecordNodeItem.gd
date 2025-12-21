@@ -2,10 +2,12 @@
 extends HBoxContainer
 
 @export
-var NodeBtn: Button
+var node_btn: Button
 
 @export
-var DelBtn: Button
+var del_btn: Button
+
+var debug_tool: CanvasLayer
 
 # 信号：请求删除此记录项
 signal delete_requested
@@ -17,12 +19,14 @@ var time_accumulator: float = 0.0  # 时间累积器，用于每秒更新路径
 
 func _ready():
 	# 连接按钮信号
-	if NodeBtn:
-		NodeBtn.pressed.connect(_on_node_button_pressed)
+	if node_btn:
+		node_btn.pressed.connect(_on_node_button_pressed)
 		# 在Button上也启用拖放转发，让拖放事件能够传递到父容器
-		NodeBtn.set_drag_forwarding(Callable(), _can_drop_data_fw, _drop_data_fw)
-	if DelBtn:
-		DelBtn.pressed.connect(_on_delete_button_pressed)
+		node_btn.set_drag_forwarding(Callable(), _can_drop_data_fw, _drop_data_fw)
+	if del_btn:
+		del_btn.pressed.connect(_on_delete_button_pressed)
+	
+	del_btn.tooltip_text = debug_tool.local.get_str("delete")
 	
 	# 启用拖放转发，让拖放事件能够传递到父容器
 	set_drag_forwarding(Callable(), _can_drop_data_fw, _drop_data_fw)
@@ -46,7 +50,7 @@ func setup_node(node: Node, tree) -> void:
 	# 设置图标
 	var icon_path = node_tree.icon_mapping.get_icon(node)
 	if icon_path and icon_path != "":
-		NodeBtn.icon = load(icon_path)
+		node_btn.icon = load(icon_path)
 
 	# 更新节点路径显示
 	_update_node_path()
@@ -63,12 +67,12 @@ func _update_node_path() -> void:
 		return
 	
 	# 更新按钮文本和提示信息
-	if NodeBtn:
+	if node_btn:
 		# 名称 + （路径）
-		NodeBtn.text = node.name + " (" + str(node.get_path()) + ")"
+		node_btn.text = node.name + " (" + str(node.get_path()) + ")"
 		
 		# 设置提示信息（显示节点路径）
-		NodeBtn.tooltip_text = "点击定位到: " + str(node.get_path())
+		node_btn.tooltip_text = debug_tool.local.get_str_replace1("click_to_locate", node.get_path())
 
 # 点击节点按钮时
 func _on_node_button_pressed() -> void:

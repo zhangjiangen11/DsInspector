@@ -42,6 +42,10 @@ var _next_frame_paused_index: int = 0
 
 func _ready():
 	_load_window_state()
+
+	debug_tool.local.change_language.connect(_on_language_changed)
+	_on_language_changed()
+
 	select_btn.pressed.connect(select_btn_click)
 	# 修改为弹出确认框
 	delete_btn.pressed.connect(_on_delete_btn_pressed)
@@ -68,6 +72,21 @@ func _ready():
 	# debug_tool.inspector
 	# 访问 NodeTree
 	# debug_tool.tree
+
+func _on_language_changed():
+	play_btn.tooltip_text = debug_tool.local.get_str("playOrStop")
+	next_frame_btn.tooltip_text = debug_tool.local.get_str("nextFrame")
+	prev_btn.tooltip_text = debug_tool.local.get_str("prev_selected_node")
+	next_btn.tooltip_text = debug_tool.local.get_str("next_selected_node")
+	save_btn.tooltip_text = debug_tool.local.get_str("save_selected_node")
+	delete_btn.tooltip_text = debug_tool.local.get_str("delete_selected_node")
+	select_btn.text = debug_tool.local.get_str("pick")
+	select_btn.tooltip_text = debug_tool.local.get_str("pick_selected_node")
+	hide_border_btn.text = debug_tool.local.get_str("close_contour")
+	hide_border_btn.tooltip_text = debug_tool.local.get_str("close_debug_border")
+	put_away.text = debug_tool.local.get_str("collapse")
+	put_away.tooltip_text = debug_tool.local.get_str("collapse_scene_tree")
+	pass
 
 func _process(delta):
 	if _next_frame_paused_index > 0:

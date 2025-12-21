@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://8irge7oa55sv"]
+[gd_scene load_steps=41 format=3 uid="uid://8irge7oa55sv"]
 
 [ext_resource type="Script" path="res://addons/ds_inspector/DsInspectorTool.gd" id="1_t800c"]
 [ext_resource type="Theme" uid="uid://bi3tgesxwq7lg" path="res://addons/ds_inspector/DsInspectorTheme.tres" id="2_rwegl"]
@@ -36,6 +36,7 @@
 [ext_resource type="PackedScene" uid="uid://buanugq8o0n2c" path="res://addons/ds_inspector/ViewportBrushLayer.tscn" id="27_ksmue"]
 [ext_resource type="PackedScene" uid="uid://dj6wf7kwqqvvq" path="res://addons/ds_inspector/ShortcutKeySetting.tscn" id="28_brx0c"]
 [ext_resource type="Script" path="res://addons/ds_inspector/ShortcutKey.gd" id="36_m6bni"]
+[ext_resource type="Script" path="res://addons/ds_inspector/Localization.gd" id="37_kusan"]
 
 [sub_resource type="Animation" id="3"]
 length = 0.001
@@ -122,10 +123,11 @@ _data = {
 "show": SubResource("2")
 }
 
-[node name="DsInspectorTool" type="CanvasLayer" node_paths=PackedStringArray("window", "brush", "mask", "inspector", "tips", "tips_anim", "cheat", "hover_iton")]
+[node name="DsInspectorTool" type="CanvasLayer" node_paths=PackedStringArray("local", "window", "brush", "mask", "inspector", "tips", "tips_anim", "cheat", "hover_iton")]
 process_mode = 3
 layer = 128
 script = ExtResource("1_t800c")
+local = NodePath("Localization")
 window = NodePath("WindowDialog")
 brush = NodePath("Brush")
 mask = NodePath("Mask")
@@ -134,6 +136,9 @@ tips = NodePath("Tips")
 tips_anim = NodePath("Tips/AnimationPlayer")
 cheat = NodePath("WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Cheat")
 hover_iton = NodePath("HoverIcon")
+
+[node name="Localization" type="Node" parent="."]
+script = ExtResource("37_kusan")
 
 [node name="Mask" type="Control" parent="."]
 visible = false
@@ -326,16 +331,16 @@ icon = ExtResource("10_h81ki")
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TreeContainer" type="VBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer"]
+[node name="TreeContainer" type="VBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer" node_paths=PackedStringArray("search_btn", "clear_search_btn", "search_input", "node_tree", "search_tree", "debug_tool")]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("11_gi7kt")
-search_btn_path = NodePath("HBoxContainer/Search")
-clear_search_btn_path = NodePath("HBoxContainer/ClearSearch")
-search_input_path = NodePath("HBoxContainer/SearchInput")
-node_tree_path = NodePath("VSplitContainer/TreeRoot/NodeTree")
-search_tree_path = NodePath("VSplitContainer/TreeRoot/SerachTree")
-debug_tool_path = NodePath("../../../../../../..")
+search_btn = NodePath("HBoxContainer/Search")
+clear_search_btn = NodePath("HBoxContainer/ClearSearch")
+search_input = NodePath("HBoxContainer/SearchInput")
+node_tree = NodePath("VSplitContainer/TreeRoot/NodeTree")
+search_tree = NodePath("VSplitContainer/TreeRoot/SerachTree")
+debug_tool = NodePath("../../../../../../..")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer"]
 layout_mode = 2
@@ -405,7 +410,7 @@ vsc = NodePath("../../..")
 expand_icon_tex = ExtResource("16_h0qj0")
 collapse_icon_tex = ExtResource("14_lsm7a")
 
-[node name="Label" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/RecordRoot/HBoxContainer"]
+[node name="RecordLabel" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/RecordRoot/HBoxContainer"]
 layout_mode = 2
 text = "记录节点实例"
 
@@ -414,28 +419,31 @@ visible = false
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RecordContainer" type="VBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/RecordRoot/ScrollContainer" node_paths=PackedStringArray("tip_label", "node_tree")]
+[node name="RecordContainer" type="VBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/RecordRoot/ScrollContainer" node_paths=PackedStringArray("record_label", "tip_label", "node_tree", "debug_tool")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("17_m28ub")
 record_node_item_scene = ExtResource("18_wb1ao")
-tip_label = NodePath("Label")
+record_label = NodePath("../../HBoxContainer/RecordLabel")
+tip_label = NodePath("TipLabel")
 node_tree = NodePath("../../../TreeRoot/NodeTree")
+debug_tool = NodePath("../../../../../../../../../../..")
 
-[node name="Label" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/RecordRoot/ScrollContainer/RecordContainer"]
+[node name="TipLabel" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/RecordRoot/ScrollContainer/RecordContainer"]
 layout_mode = 2
 size_flags_vertical = 6
 text = "拖拽节点放入此区域"
 horizontal_alignment = 1
 text_overrun_behavior = 3
 
-[node name="TabContainer" type="TabContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer"]
+[node name="TabContainer" type="TabContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer" node_paths=PackedStringArray("debug_tool")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 script = ExtResource("14_x52hf")
-tab_names = ["检查器", "收藏路径", "排除路径", "作弊", "设置"]
+tab_names = ["inspector", "collect_path", "exclude_path", "cheat", "settings"]
+debug_tool = NodePath("../../../../../../..")
 
 [node name="Inspector" type="VBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer"]
 layout_mode = 2
@@ -775,6 +783,9 @@ debug_tool = NodePath("../../../../../../../../../../../..")
 [node name="VBoxContainer2" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/ShortcutKeySetting" index="1"]
 visible = false
 
+[node name="KeyBtn" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/ShortcutKeySetting/VBoxContainer2/Item18" index="1"]
+text = "Ctrl + ;"
+
 [node name="SaveFileDialog" type="FileDialog" parent="."]
 title = "保存场景"
 position = Vector2i(380, 36)
@@ -809,13 +820,12 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -240.0
+offset_left = -780.0
 offset_top = -141.0
-offset_right = 240.0
+offset_right = 781.0
 offset_bottom = -87.0
 grow_horizontal = 2
 grow_vertical = 0
-pivot_offset = Vector2(240, 34)
 size_flags_vertical = 0
 theme = ExtResource("2_rwegl")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
