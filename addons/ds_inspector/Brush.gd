@@ -254,6 +254,10 @@ func _draw_border(brush_node: CanvasItem, path_tips: DsNodePathTips):
 			_draw_node_rect(brush_node, trans.position, trans.scale, trans.size, trans.rotation, false)
 	elif _draw_node is VisibleOnScreenEnabler2D or _draw_node is VisibleOnScreenNotifier2D:
 		_draw_node_rect(brush_node, trans.position, trans.scale, trans.size, trans.rotation, true)
+	elif _draw_node is Path2D:
+		_draw_node_path(brush_node, _draw_node.curve, trans.position, trans.scale, trans.rotation, _draw_node.global_scale)
+	elif _draw_node is Line2D:
+		_draw_node_line(brush_node, _draw_node, trans.position, trans.scale, trans.rotation, _draw_node.global_scale)
 	else:
 		_draw_node_rect(brush_node, trans.position, trans.scale, trans.size, trans.rotation, false)
 
@@ -396,3 +400,93 @@ func _draw_node_rect(brush_node: CanvasItem, pos: Vector2, scale: Vector2, size:
 	brush_node.draw_rect(rect, Color(1,0,0), false, 1 / scale.x * 2 * wscale)
 	# 重置变换
 	brush_node.draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
+
+func _draw_node_path(brush_node: CanvasItem, curve: Curve2D, pos: Vector2, canvas_scale: Vector2, rot: float, node_scale: Vector2):
+	var wscale: float = get_viewport_wscale()
+	brush_node.draw_circle(pos, 3 * wscale, Color(1, 0, 0))
+	if curve != null and curve.get_point_count() > 0:
+		# 设置变换，保持 canvas_scale 不变
+		brush_node.draw_set_transform(pos, rot, canvas_scale)
+		# 获取曲线的细分点并绘制
+		var points: PackedVector2Array = curve.get_baked_points()
+		if points.size() > 1:
+			# 将每个点应用 node_scale
+			var scaled_points: PackedVector2Array = []
+			for point in points:
+				scaled_points.append(point * node_scale)
+			# 计算矩形范围
+			var min_pos = scaled_points[0]
+			var max_pos = scaled_points[0]
+			for point in scaled_points:
+				min_pos.x = min(min_pos.x, point.x)
+				min_pos.y = min(min_pos.y, point.y)
+				max_pos.x = max(max_pos.x, point.x)
+				max_pos.y = max(max_pos.y, point.y)
+			# 绘制矩形范围
+			var rect = Rect2(min_pos, max_pos - min_pos)
+			brush_node.draw_rect(rect, Color(1, 0, 0), false, 2.0 * wscale)
+			# 绘制曲线路径
+			brush_node.draw_polyline(scaled_points, Color(0, 1, 1, 0.5), 2.0 * wscale)
+			# 绘制方向箭头（每隔指定像素）
+			var arrow_interval = 50
+			var accumulated_distance = 0.0
+			var last_arrow_distance = 0.0
+			for i in range(1, scaled_points.size()):
+				var segment_start = scaled_points[i - 1]
+				var segment_end = scaled_points[i]
+				var segment_vector = segment_end - segment_start
+				var segment_length = segment_vector.length()
+				
+				if segment_length > 0:
+					var segment_dir = segment_vector.normalized()
+					# 检查这段线段内是否需要绘制箭头
+					while accumulated_distance + segment_length >= last_arrow_distance + arrow_interval:
+						var distance_in_segment = (last_arrow_distance + arrow_interval) - accumulated_distance
+						var arrow_pos = segment_start + segment_dir * distance_in_segment
+						# 绘制箭头
+						var arrow_size = 12.0 * wscale
+						var arrow_angle = 0.5  # 箭头张角
+						var left_dir = segment_dir.rotated(PI - arrow_angle)
+						var right_dir = segment_dir.rotated(PI + arrow_angle)
+						var arrow_p1 = arrow_pos + left_dir * arrow_size
+						var arrow_p2 = arrow_pos + right_dir * arrow_size
+						brush_node.draw_line(arrow_pos, arrow_p1, Color(0, 1, 1, 0.5), 2.0 * wscale)
+						brush_node.draw_line(arrow_pos, arrow_p2, Color(0, 1, 1, 0.5), 2.0 * wscale)
+						last_arrow_distance += arrow_interval
+					accumulated_distance += segment_length
+			# 绘制控制点
+			for i in range(curve.get_point_count()):
+				var point_pos = curve.get_point_position(i) * node_scale
+				brush_node.draw_circle(point_pos, 4 * wscale, Color(0, 1, 0, 0.55))
+		# 重置变换
+		brush_node.draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
+
+func _draw_node_line(brush_node: CanvasItem, line: Line2D, pos: Vector2, canvas_scale: Vector2, rot: float, node_scale: Vector2):
+	var wscale: float = get_viewport_wscale()
+	brush_node.draw_circle(pos, 3 * wscale, Color(1, 0, 0))
+	if line != null and line.points.size() > 0:
+		# 设置变换，保持 canvas_scale 不变
+		brush_node.draw_set_transform(pos, rot, canvas_scale)
+		# 将每个点应用 node_scale
+		var scaled_points: PackedVector2Array = []
+		for point in line.points:
+			scaled_points.append(point * node_scale)
+		# 绘制线段
+		brush_node.draw_polyline(scaled_points, Color(0, 1, 1, 0.5), 2.0 * wscale)
+		# 绘制矩形边框和控制点
+		if scaled_points.size() > 0:
+			# 计算矩形范围并绘制控制点
+			var min_pos = scaled_points[0]
+			var max_pos = scaled_points[0]
+			for point in scaled_points:
+				min_pos.x = min(min_pos.x, point.x)
+				min_pos.y = min(min_pos.y, point.y)
+				max_pos.x = max(max_pos.x, point.x)
+				max_pos.y = max(max_pos.y, point.y)
+				brush_node.draw_circle(point, 4 * wscale, Color(0, 1, 0, 0.55))
+			# 绘制矩形范围
+			if scaled_points.size() > 1:
+				var rect = Rect2(min_pos, max_pos - min_pos)
+				brush_node.draw_rect(rect, Color(1, 0, 0), false, 2.0 * wscale)
+		# 重置变换
+		brush_node.draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)

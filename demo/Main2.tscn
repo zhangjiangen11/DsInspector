@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cibl6pnjmm7tt"]
+[gd_scene load_steps=6 format=3 uid="uid://cibl6pnjmm7tt"]
 
 [ext_resource type="Script" path="res://demo/Main2.gd" id="1_cd67i"]
 [ext_resource type="PackedScene" uid="uid://dg7yokqpg14u" path="res://demo/TestWindow.tscn" id="2_xdwq8"]
@@ -6,6 +6,12 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mb71u"]
 size = Vector2(128, 128)
+
+[sub_resource type="Curve2D" id="Curve2D_efqod"]
+_data = {
+"points": PackedVector2Array(29.9336, -23.4026, -29.9336, 23.4026, -148, -23, 0, 0, 0, 0, -104, 100, 0, 0, 0, 0, -38, 87, 0, 0, 0, 0, 3, -52, -24.219, -33.4712, 24.219, 33.4712, -62, -13, 3.80973, -44.9004, -3.80973, 44.9004, 19, 42, 46.5332, 64.4933, -46.5332, -64.4933, -148, -23)
+}
+point_count = 7
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("open_window_button")]
 script = ExtResource("1_cd67i")
@@ -225,6 +231,16 @@ texture = ExtResource("3_j24b1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/SubViewportContainer/SubViewport/StaticBody2D2"]
 shape = SubResource("RectangleShape2D_mb71u")
+
+[node name="Path2D" type="Path2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+position = Vector2(50, 50)
+scale = Vector2(0.3, 0.6)
+curve = SubResource("Curve2D_efqod")
+
+[node name="Line2D" type="Line2D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+position = Vector2(30, 30)
+scale = Vector2(0.3, 0.3)
+points = PackedVector2Array(-16, -74, 91, -13, -36, 125, -90, 49, -24, 13, -97, -48)
 
 [node name="OpenWindow" type="Button" parent="CanvasLayer"]
 offset_left = 90.0
