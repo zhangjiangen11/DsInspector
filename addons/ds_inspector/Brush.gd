@@ -88,6 +88,12 @@ func _process(_delta):
 		window_layer_instance.brush.queue_redraw()
 	pass
 
+func get_viewport_wscale() -> float:
+	if _viewport_node != null and is_instance_valid(_viewport_node) and \
+		_viewport_node is SubViewport and _viewport_node.size_2d_override_stretch:
+		return float(_viewport_node.size_2d_override.x) / _viewport_node.size.x
+	return 1.0
+
 func get_draw_node() -> Node:
 	if !_has_draw_node:
 		return null
@@ -355,14 +361,16 @@ func find_viewport_node(node: Node) -> Viewport:
 	return null
 
 func _draw_node_shape(brush_node: CanvasItem, shape: Shape2D, pos: Vector2, scale: Vector2, rot: float):
-	brush_node.draw_circle(pos, 3, Color(1, 0, 0))
+	var wscale: float = get_viewport_wscale()
+	brush_node.draw_circle(pos, 3 * wscale, Color(1, 0, 0))
 	if shape != null:
 		brush_node.draw_set_transform(pos, rot, scale)
 		shape.draw(brush_node.get_canvas_item(), Color(0, 1, 1, 0.5))
 		brush_node.draw_set_transform(Vector2.ZERO, 0, Vector2.ZERO)
 
 func _draw_node_polygon(brush_node: CanvasItem, polygon: PackedVector2Array, pos: Vector2, scale: Vector2, rot: float):
-	brush_node.draw_circle(pos, 3, Color(1, 0, 0))
+	var wscale: float = get_viewport_wscale()
+	brush_node.draw_circle(pos, 3 * wscale, Color(1, 0, 0))
 	if polygon != null and polygon.size() > 0:
 		# 画轮廓线
 		var arr: Array[Vector2] = []
@@ -371,11 +379,12 @@ func _draw_node_polygon(brush_node: CanvasItem, polygon: PackedVector2Array, pos
 		brush_node.draw_set_transform(pos, rot, scale)
 		# 画填充多边形
 		brush_node.draw_polygon(polygon, [Color(1, 0, 0, 0.3)])  # 半透明红色
-		brush_node.draw_polyline(arr, Color(1, 0, 0), 2.0)  # 闭合线
+		brush_node.draw_polyline(arr, Color(1, 0, 0), 2.0 * wscale)  # 闭合线
 		brush_node.draw_set_transform(Vector2.ZERO, 0, Vector2.ZERO)
 
 func _draw_node_rect(brush_node: CanvasItem, pos: Vector2, scale: Vector2, size: Vector2, rot: float, filled: bool):
-	brush_node.draw_circle(pos, 3, Color(1, 0, 0))
+	var wscale: float = get_viewport_wscale()
+	brush_node.draw_circle(pos, 3 * wscale, Color(1, 0, 0))
 	if size == Vector2.ZERO:
 		return
 	# 设置绘制变换
@@ -384,6 +393,6 @@ func _draw_node_rect(brush_node: CanvasItem, pos: Vector2, scale: Vector2, size:
 	var rect = Rect2(Vector2.ZERO, size)
 	if filled:
 		brush_node.draw_rect(rect, Color(1,0,0,0.3), true)
-	brush_node.draw_rect(rect, Color(1,0,0), false, 1 / scale.x * 2)
+	brush_node.draw_rect(rect, Color(1,0,0), false, 1 / scale.x * 2 * wscale)
 	# 重置变换
 	brush_node.draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
