@@ -86,6 +86,9 @@ func _on_language_changed():
 	hide_border_btn.tooltip_text = debug_tool.local.get_str("close_debug_border")
 	put_away.text = debug_tool.local.get_str("collapse")
 	put_away.tooltip_text = debug_tool.local.get_str("collapse_scene_tree")
+	confirmation.title = debug_tool.local.get_str("are_you_sure")
+	confirmation.ok_button_text = debug_tool.local.get_str("ok")
+	confirmation.cancel_button_text = debug_tool.local.get_str("cancel")
 	pass
 
 func _process(delta):
@@ -128,7 +131,7 @@ func select_btn_click():
 
 # 删除按钮点击，弹出确认框
 func _on_delete_btn_pressed():
-	confirmation.dialog_text = "确定要删除选中的节点吗？"
+	confirmation.dialog_text = debug_tool.local.get_str("are_you_sure_you_want_to_delete_the_selected_node")
 	confirmation.popup_centered()
 
 # 确认框确认后执行删除

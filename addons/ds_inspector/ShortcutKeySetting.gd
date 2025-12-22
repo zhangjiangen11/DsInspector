@@ -144,6 +144,10 @@ func _on_language_changed():
 	if !debug_tool or !debug_tool.local:
 		return
 	
+	shortcut_dialog.title = debug_tool.local.get_str("record_shortcut_keys")
+	shortcut_dialog.ok_button_text = debug_tool.local.get_str("ok")
+	shortcut_dialog.cancel_button_text = debug_tool.local.get_str("cancel")
+	
 	# 更新标题
 	var header = get_node_or_null("HBoxContainer")
 	if header:
@@ -229,11 +233,6 @@ func _setup_dialog():
 	if !shortcut_dialog:
 		return
 	
-	# 设置弹窗标题
-	shortcut_dialog.title = "录制快捷键"
-	shortcut_dialog.ok_button_text = "确定"
-	shortcut_dialog.cancel_button_text = "取消"
-	
 	# 创建一个控件来接收输入
 	_input_control = Control.new()
 	_input_control.custom_minimum_size = Vector2(280, 80)
@@ -242,7 +241,7 @@ func _setup_dialog():
 	
 	# 创建标签显示提示信息
 	_dialog_label = Label.new()
-	_dialog_label.text = "请按下键盘快捷键..."
+	_dialog_label.text = debug_tool.local.get_str("please_press_the_shortcut_key")
 	_dialog_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_dialog_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_dialog_label.custom_minimum_size = Vector2(280, 80)
@@ -267,7 +266,7 @@ func _on_shortcut_btn_pressed(shortcut_name: String, display_name: String):
 	_recorded_shift = false
 	_recorded_meta = false
 	
-	_dialog_label.text = "请按下键盘快捷键..."
+	_dialog_label.text = debug_tool.local.get_str("please_press_the_shortcut_key")
 	shortcut_dialog.popup_centered()
 	# 延迟设置焦点到输入控件，确保弹窗已完全显示
 	_input_control.call_deferred("grab_focus")
@@ -288,7 +287,7 @@ func _on_dialog_input(event: InputEvent):
 		
 		# 显示录制的快捷键
 		var shortcut_text = _get_shortcut_text(_recorded_keycode, _recorded_ctrl, _recorded_alt, _recorded_shift, _recorded_meta)
-		_dialog_label.text = "录制到的快捷键：\n" + shortcut_text
+		_dialog_label.text = debug_tool.local.get_str("recorded_shortcut_keys") + "\n" + shortcut_text
 		
 		# 接受事件，防止传递
 		_input_control.accept_event()
