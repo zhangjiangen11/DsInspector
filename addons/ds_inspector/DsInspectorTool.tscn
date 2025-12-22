@@ -453,7 +453,7 @@ metadata/_tab_name = "检查器"
 [node name="FiltrInput" type="LineEdit" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Inspector"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "筛选属性，使用\"|\"同时筛选多个属性"
+placeholder_text = "Filter properties, use \"|\" to filter multiple properties at the same time"
 
 [node name="BgColor" type="ColorRect" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Inspector"]
 layout_mode = 2
@@ -499,12 +499,12 @@ layout_mode = 2
 
 [node name="AddButton" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/CollectContainer/HBoxContainer"]
 layout_mode = 2
-text = "添加选中的节点"
+text = "Add Selected Node"
 
 [node name="CollectLabel" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/CollectContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "收藏的节点点击时可以被快速选中。"
+text = "Collected nodes can be quickly selected when clicked."
 text_overrun_behavior = 3
 
 [node name="Collect" type="Tree" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/CollectContainer" node_paths=PackedStringArray("add_btn", "collect_label", "debug_tool")]
@@ -527,12 +527,12 @@ layout_mode = 2
 
 [node name="AddButton" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/ExcludeContainer/HBoxContainer"]
 layout_mode = 2
-text = "添加选中的节点"
+text = "Add Selected Node"
 
 [node name="ExcludeLabel" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/ExcludeContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "被排除的节点不会在拣选时被选中。"
+text = "Excluded nodes will not be selected during picking."
 text_overrun_behavior = 3
 
 [node name="Exclude" type="Tree" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/ExcludeContainer" node_paths=PackedStringArray("add_btn", "exclude_label", "debug_tool")]
@@ -557,7 +557,7 @@ metadata/_tab_name = "作弊"
 
 [node name="CheatTips" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Cheat"]
 layout_mode = 2
-text = "使用 DsInspector.add_cheat_button() 添加做弊按钮"
+text = "Use DsInspector.add_cheat_button() to add cheat buttons"
 text_overrun_behavior = 3
 
 [node name="Container" type="ColorRect" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Cheat"]
@@ -650,7 +650,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "语言"
+text = "Language"
 autowrap_mode = 3
 
 [node name="OptionButton" type="OptionButton" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem7"]
@@ -658,7 +658,12 @@ custom_minimum_size = Vector2(75, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
-selected = 2
+item_count = 2
+selected = 1
+popup/item_0/text = "中文"
+popup/item_0/id = 0
+popup/item_1/text = "English"
+popup/item_1/id = 1
 
 [node name="SettingItem4" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList"]
 layout_mode = 2
@@ -669,7 +674,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "Ui整体缩放"
+text = "UI Scale"
 autowrap_mode = 3
 
 [node name="OptionButton" type="OptionButton" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem4"]
@@ -707,7 +712,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "启动游戏自动打弹窗"
+text = "Auto Open Dialog on Game Start"
 autowrap_mode = 3
 
 [node name="CheckBox" type="CheckBox" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem3"]
@@ -716,6 +721,7 @@ size_flags_horizontal = 10
 size_flags_vertical = 0
 
 [node name="SettingItem" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList"]
+visible = false
 layout_mode = 2
 
 [node name="UseSystemTitle" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem"]
@@ -724,7 +730,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "使用系统原生弹窗（会影响游戏中所有弹窗，下一次启动游戏生效）"
+text = "Use Native Dialog (affects all dialogs, takes effect on next game start)"
 autowrap_mode = 3
 
 [node name="CheckBox" type="CheckBox" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem"]
@@ -741,7 +747,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "场景树自动搜索（可能造成卡顿）"
+text = "Scene Tree Auto Search (may cause lag)"
 autowrap_mode = 3
 
 [node name="CheckBox" type="CheckBox" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem2"]
@@ -758,7 +764,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "允许拣选Viewport、Window节点（会在视窗下生成绘制节点）"
+text = "Allow Pick Viewport/Window Nodes (creates draw nodes under viewport)"
 autowrap_mode = 3
 
 [node name="CheckBox" type="CheckBox" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem6"]
@@ -780,7 +786,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "远程通知Godot编辑器打开场景、脚本，该设置会开启一个服务器（需要重启编辑器）"
+text = "Remote Notify Godot Editor to Open Scene/Script (starts a server, requires editor restart)"
 autowrap_mode = 3
 
 [node name="CheckBox" type="CheckBox" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem5/HBoxContainer"]
@@ -798,7 +804,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "服务端口："
+text = "Server Port:"
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
@@ -812,11 +818,8 @@ placeholder_text = "服务器端口"
 layout_mode = 2
 debug_tool = NodePath("../../../../../../../../../../../..")
 
-[node name="VBoxContainer2" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/ShortcutKeySetting" index="1"]
-visible = false
-
-[node name="KeyBtn" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/ShortcutKeySetting/VBoxContainer2/Item18" index="1"]
-text = "Ctrl + ;"
+[node name="Title" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/ShortcutKeySetting/HBoxContainer" index="0"]
+text = "Enable Keyboard Shortcuts"
 
 [node name="SaveFileDialog" type="FileDialog" parent="."]
 title = "保存场景"
@@ -875,8 +878,10 @@ libraries = {
 }
 
 [node name="HoverIcon" type="TextureButton" parent="."]
-offset_right = 48.0
-offset_bottom = 48.0
+offset_left = 1966.0
+offset_top = 41.0
+offset_right = 2014.0
+offset_bottom = 89.0
 texture_normal = ExtResource("21_pv2ua")
 texture_pressed = ExtResource("22_0afkq")
 texture_hover = ExtResource("23_qya0n")

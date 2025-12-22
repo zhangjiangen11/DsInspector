@@ -13,43 +13,8 @@ var debug_tool: CanvasLayer
 @export
 var shortcut_dialog: ConfirmationDialog
 
-# 快捷键按钮
-@export
-var toggle_window_btn: Button
-@export
-var pause_play_btn: Button
-@export
-var step_execute_btn: Button
-@export
-var prev_node_btn: Button
-@export
-var next_node_btn: Button
-@export
-var save_node_btn: Button
-@export
-var delete_node_btn: Button
-@export
-var pick_node_btn: Button
-@export
-var collapse_expand_btn: Button
-@export
-var focus_search_node_btn: Button
-@export
-var focus_search_attr_btn: Button
-@export
-var toggle_selected_node_btn: Button
-@export
-var open_node_scene_btn: Button
-@export
-var open_node_script_btn: Button
-@export
-var record_node_instance_btn: Button
-@export
-var collect_path_btn: Button
-@export
-var exclude_path_btn: Button
-@export
-var disable_outline_btn: Button
+# 使用字典存储快捷键按钮的引用
+var _shortcut_buttons: Dictionary = {}
 
 # 弹窗中的标签
 var _dialog_label: Label
@@ -63,6 +28,28 @@ var _recorded_ctrl: bool = false
 var _recorded_alt: bool = false
 var _recorded_shift: bool = false
 var _recorded_meta: bool = false
+
+# 快捷键配置数据
+const SHORTCUT_CONFIGS = [
+	{"key": "toggle_window", "label_key": "shortcut_toggle_window"},
+	{"key": "pause_play", "label_key": "shortcut_pause_play"},
+	{"key": "step_execute", "label_key": "shortcut_step_execute"},
+	{"key": "prev_node", "label_key": "shortcut_prev_node"},
+	{"key": "next_node", "label_key": "shortcut_next_node"},
+	{"key": "save_node", "label_key": "shortcut_save_node"},
+	{"key": "delete_node", "label_key": "shortcut_delete_node"},
+	{"key": "pick_node", "label_key": "shortcut_pick_node"},
+	{"key": "disable_outline", "label_key": "shortcut_disable_outline"},
+	{"key": "collapse_expand", "label_key": "shortcut_collapse_expand"},
+	{"key": "focus_search_node", "label_key": "shortcut_focus_search_node"},
+	{"key": "focus_search_attr", "label_key": "shortcut_focus_search_attr"},
+	{"key": "open_node_scene", "label_key": "shortcut_open_node_scene"},
+	{"key": "open_node_script", "label_key": "shortcut_open_node_script"},
+	{"key": "toggle_selected_node", "label_key": "shortcut_toggle_selected_node"},
+	{"key": "record_node_instance", "label_key": "shortcut_record_node_instance"},
+	{"key": "collect_path", "label_key": "shortcut_collect_path"},
+	{"key": "exclude_path", "label_key": "shortcut_exclude_path"},
+]
 
 # Input Action 名称前缀
 const ACTION_PREFIX = "ds_inspector_"
@@ -93,31 +80,14 @@ func _ready():
 	if !debug_tool:
 		return
 	
+	# 动态创建快捷键UI
+	_create_shortcut_items()
+	
 	debug_tool.local.change_language.connect(_on_language_changed)
 	_on_language_changed()
 	
 	# 初始化弹窗
 	_setup_dialog()
-	
-	# 连接所有按钮的点击事件
-	toggle_window_btn.pressed.connect(_on_shortcut_btn_pressed.bind("toggle_window", "隐藏/显示窗口"))
-	pause_play_btn.pressed.connect(_on_shortcut_btn_pressed.bind("pause_play", "暂停/播放"))
-	step_execute_btn.pressed.connect(_on_shortcut_btn_pressed.bind("step_execute", "单步执行"))
-	prev_node_btn.pressed.connect(_on_shortcut_btn_pressed.bind("prev_node", "上一个节点"))
-	next_node_btn.pressed.connect(_on_shortcut_btn_pressed.bind("next_node", "下一个节点"))
-	save_node_btn.pressed.connect(_on_shortcut_btn_pressed.bind("save_node", "保存节点"))
-	delete_node_btn.pressed.connect(_on_shortcut_btn_pressed.bind("delete_node", "删除节点"))
-	pick_node_btn.pressed.connect(_on_shortcut_btn_pressed.bind("pick_node", "拣选节点"))
-	collapse_expand_btn.pressed.connect(_on_shortcut_btn_pressed.bind("collapse_expand", "收起展开"))
-	focus_search_node_btn.pressed.connect(_on_shortcut_btn_pressed.bind("focus_search_node", "聚焦搜索节点"))
-	focus_search_attr_btn.pressed.connect(_on_shortcut_btn_pressed.bind("focus_search_attr", "聚焦搜索属性"))
-	toggle_selected_node_btn.pressed.connect(_on_shortcut_btn_pressed.bind("toggle_selected_node", "隐藏/显示选中节点"))
-	open_node_scene_btn.pressed.connect(_on_shortcut_btn_pressed.bind("open_node_scene", "打开选中节点的场景"))
-	open_node_script_btn.pressed.connect(_on_shortcut_btn_pressed.bind("open_node_script", "打开选中节点的脚本"))
-	record_node_instance_btn.pressed.connect(_on_shortcut_btn_pressed.bind("record_node_instance", "记录节点实例"))
-	collect_path_btn.pressed.connect(_on_shortcut_btn_pressed.bind("collect_path", "收藏当前路径"))
-	exclude_path_btn.pressed.connect(_on_shortcut_btn_pressed.bind("exclude_path", "排除当前路径"))
-	disable_outline_btn.pressed.connect(_on_shortcut_btn_pressed.bind("disable_outline", "关闭绘制轮廓"))
 	
 	# 初始化所有 Input Action
 	_init_input_actions()
@@ -125,8 +95,71 @@ func _ready():
 	# 加载并显示当前的快捷键
 	_load_shortcuts()
 
+func _create_shortcut_items():
+	"""动态创建所有快捷键选项"""
+	var container = get_node("VBoxContainer2")
+	if !container:
+		return
+	
+	# 清空容器中的所有子节点
+	for child in container.get_children():
+		child.queue_free()
+	
+	# 动态创建每个快捷键选项
+	for config in SHORTCUT_CONFIGS:
+		var label_text = debug_tool.local.get_str(config["label_key"])
+		_create_shortcut_item(container, config["key"], config["label_key"], label_text)
+
+func _create_shortcut_item(container: VBoxContainer, key: String, label_key: String, label_text: String):
+	"""创建单个快捷键选项"""
+	var item_container = HBoxContainer.new()
+	item_container.size_flags_horizontal = Control.SIZE_FILL
+	item_container.set_meta("label_key", label_key)  # 存储翻译键，用于语言切换
+	container.add_child(item_container)
+	
+	# 创建标签
+	var label = Label.new()
+	label.custom_minimum_size = Vector2(150, 27)
+	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	label.text = label_text
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.name = "Label"
+	item_container.add_child(label)
+	
+	# 创建按钮
+	var button = Button.new()
+	button.custom_minimum_size = Vector2(200, 0)
+	button.text = "未设置"
+	button.pressed.connect(_on_shortcut_btn_pressed.bind(key, label_text))
+	item_container.add_child(button)
+	
+	# 存储按钮引用
+	_shortcut_buttons[key] = button
+
 func _on_language_changed():
-	pass
+	"""语言切换时更新所有文本"""
+	if !debug_tool or !debug_tool.local:
+		return
+	
+	# 更新标题
+	var header = get_node_or_null("HBoxContainer")
+	if header:
+		var title_label = header.get_node_or_null("Title")
+		if title_label:
+			title_label.text = debug_tool.local.get_str("enable_keyboard_shortcuts")
+	
+	# 更新所有快捷键选项的标签文本
+	var container = get_node_or_null("VBoxContainer2")
+	if container:
+		for item in container.get_children():
+			if item is HBoxContainer and item.has_meta("label_key"):
+				var label_key = item.get_meta("label_key")
+				var label = item.get_node_or_null("Label")
+				if label:
+					label.text = debug_tool.local.get_str(label_key)
 
 func _exit_tree():
 	"""节点退出时清理 Input Actions"""
@@ -328,24 +361,10 @@ func _load_shortcuts():
 	var shortcut_data = save_config.get_shortcut_key_data()
 	
 	# 更新所有按钮的文本
-	_update_button_text(toggle_window_btn, shortcut_data.toggle_window)
-	_update_button_text(pause_play_btn, shortcut_data.pause_play)
-	_update_button_text(step_execute_btn, shortcut_data.step_execute)
-	_update_button_text(prev_node_btn, shortcut_data.prev_node)
-	_update_button_text(next_node_btn, shortcut_data.next_node)
-	_update_button_text(save_node_btn, shortcut_data.save_node)
-	_update_button_text(delete_node_btn, shortcut_data.delete_node)
-	_update_button_text(pick_node_btn, shortcut_data.pick_node)
-	_update_button_text(collapse_expand_btn, shortcut_data.collapse_expand)
-	_update_button_text(focus_search_node_btn, shortcut_data.focus_search_node)
-	_update_button_text(focus_search_attr_btn, shortcut_data.focus_search_attr)
-	_update_button_text(toggle_selected_node_btn, shortcut_data.toggle_selected_node)
-	_update_button_text(open_node_scene_btn, shortcut_data.open_node_scene)
-	_update_button_text(open_node_script_btn, shortcut_data.open_node_script)
-	_update_button_text(record_node_instance_btn, shortcut_data.record_node_instance)
-	_update_button_text(collect_path_btn, shortcut_data.collect_path)
-	_update_button_text(exclude_path_btn, shortcut_data.exclude_path)
-	_update_button_text(disable_outline_btn, shortcut_data.disable_outline)
+	for key in _shortcut_buttons:
+		var button = _shortcut_buttons[key]
+		var shortcut_dict = shortcut_data.get(key)
+		_update_button_text(button, shortcut_dict)
 
 func _update_button_text(button: Button, shortcut_dict: Dictionary):
 	if !button or shortcut_dict.is_empty():

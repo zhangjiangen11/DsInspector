@@ -61,8 +61,8 @@ func set_debug_tool(debug_tool: CanvasLayer):
 	self.debug_tool = debug_tool
 
 func _ready():
-	prev_btn.text = debug_tool.local.get_str("prev_selected_node")
-	next_btn.text = debug_tool.local.get_str("next_selected_node")
+	prev_btn.text = debug_tool.local.get_str("previous_page")
+	next_btn.text = debug_tool.local.get_str("next_page")
 
 	expand_btn.pressed.connect(on_expand_btn_pressed)
 	prev_btn.pressed.connect(_on_prev_page)
@@ -343,8 +343,8 @@ func _update_page_buttons():
 	page_btn_root.visible = true
 	
 	# 更新按钮文本
-	prev_btn.text = "上一页 (%d/%d)" % [_current_page + 1, _total_pages]
-	next_btn.text = "下一页 (%d/%d)" % [_current_page + 1, _total_pages]
+	prev_btn.text = debug_tool.local.get_str("previous_page") + " (%d/%d)" % [_current_page + 1, _total_pages]
+	next_btn.text = debug_tool.local.get_str("next_page") + " (%d/%d)" % [_current_page + 1, _total_pages]
 	
 	# 更新按钮启用状态
 	prev_btn.disabled = _current_page <= 0
