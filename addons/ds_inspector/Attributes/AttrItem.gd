@@ -117,7 +117,7 @@ func _recreate_attr(new_value):
 
 # 根据值创建对应类型的attr
 func _create_attr_for_value(value, prop: Dictionary):
-	var attr = null
+	var attr: Node = null
 	
 	# ------------- 特殊处理 -----------------
 	if _curr_node is AnimatedSprite2D:
@@ -167,4 +167,7 @@ func _create_attr_for_value(value, prop: Dictionary):
 				_:
 					attr = _inspector_container.rich_text_attr.instantiate()
 	
+	if attr.has_method("set_debug_tool"):
+		attr.set_debug_tool(_inspector_container.debug_tool)
+
 	return attr

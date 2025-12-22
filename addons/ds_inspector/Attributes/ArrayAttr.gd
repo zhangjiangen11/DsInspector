@@ -22,6 +22,8 @@ var page_size: int = 20
 @export
 var delete_slot: PackedScene
 
+var debug_tool: CanvasLayer
+
 var type: String = "array"
 
 var _node  # 父对象（可能是Node，也可能是其他Object）
@@ -55,7 +57,13 @@ class ArrayWrapper:
 		if idx >= 0 and idx < array.size():
 			array[idx] = value
 
+func set_debug_tool(debug_tool: CanvasLayer):
+	self.debug_tool = debug_tool
+
 func _ready():
+	prev_btn.text = debug_tool.local.get_str("prev_selected_node")
+	next_btn.text = debug_tool.local.get_str("next_selected_node")
+
 	expand_btn.pressed.connect(on_expand_btn_pressed)
 	prev_btn.pressed.connect(_on_prev_page)
 	next_btn.pressed.connect(_on_next_page)

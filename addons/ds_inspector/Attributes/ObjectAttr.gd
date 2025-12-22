@@ -12,6 +12,8 @@ var attr_container: VBoxContainer
 @export
 var junp_button: Button
 
+var debug_tool: CanvasLayer
+
 var type: String = "object"
 
 var _node  # 父对象（可能是Node，也可能是其他Object）
@@ -22,7 +24,11 @@ var _value  # 当前Object的值
 var _is_expanded: bool = false
 var _is_initialized: bool = false  # 是否已经初始化过子字段
 
+func set_debug_tool(debug_tool: CanvasLayer):
+	self.debug_tool = debug_tool
+
 func _ready():
+	junp_button.tooltip_text = debug_tool.local.get_str("jump_to_node")
 	expand_btn.pressed.connect(on_expand_btn_pressed)
 	expand_btn.icon = collapse_icon_tex
 	attr_container.visible = false
