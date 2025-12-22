@@ -15,6 +15,10 @@ run/main_scene="res://demo/Main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+DsInspector="*res://addons/ds_inspector/DsInspector.gd"
+
 [display]
 
 window/size/viewport_width=1920
@@ -24,6 +28,10 @@ window/dpi/allow_hidpi=false
 [dotnet]
 
 project/assembly_name="DsInspector"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ds_inspector/plugin.cfg")
 
 [physics]
 

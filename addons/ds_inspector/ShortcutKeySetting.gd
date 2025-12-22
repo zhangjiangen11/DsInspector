@@ -145,7 +145,7 @@ func _on_language_changed():
 		return
 	
 	shortcut_dialog.title = debug_tool.local.get_str("record_shortcut_keys")
-	shortcut_dialog.ok_button_text = debug_tool.local.get_str("ok")
+	shortcut_dialog.ok_button_text = debug_tool.local.get_str("confirm")
 	shortcut_dialog.cancel_button_text = debug_tool.local.get_str("cancel")
 	
 	# 更新标题

@@ -87,7 +87,7 @@ func _on_language_changed():
 	put_away.text = debug_tool.local.get_str("collapse")
 	put_away.tooltip_text = debug_tool.local.get_str("collapse_scene_tree")
 	confirmation.title = debug_tool.local.get_str("are_you_sure")
-	confirmation.ok_button_text = debug_tool.local.get_str("ok")
+	confirmation.ok_button_text = debug_tool.local.get_str("confirm")
 	confirmation.cancel_button_text = debug_tool.local.get_str("cancel")
 	pass
 
