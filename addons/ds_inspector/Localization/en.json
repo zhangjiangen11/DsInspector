@@ -46,5 +46,10 @@
     "are_you_sure_you_want_to_delete_the_selected_node": "Are you sure you want to delete the selected node?",
     "unable_to_find_node_with_path_0": "Unable to find node with path '{0}'",
     "missed_the_selected_node_mac": "Missed the selected node?\nHold Command and click the left mouse button to backtrack the selected node!",
-    "missed_the_selected_node_win": "Missed the selected node?\nHold Ctrl and click the left mouse button to backtrack the selected node!"
+    "missed_the_selected_node_win": "Missed the selected node?\nHold Ctrl and click the left mouse button to backtrack the selected node!",
+    "name": "Name",
+    "type": "Type",
+    "path": "Path",
+    "scene": "Scene",
+    "script": "Script"
 }

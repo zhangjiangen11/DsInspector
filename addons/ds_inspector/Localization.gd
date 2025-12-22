@@ -1,7 +1,8 @@
+@tool
 extends Node
 
 # 信号，当语言改变时发出
-signal change_language()
+signal change_language
 
 var curr_locale: String = "en"
 var curr_map: Dictionary = {}

@@ -81,8 +81,14 @@ class AttrItem:
 	pass
 
 func _ready():
+	debug_tool.local.change_language.connect(_on_language_changed)
+	_on_language_changed()
 	if filtr_input:
 		filtr_input.text_changed.connect(_on_filter_text_changed)
+	pass
+
+func _on_language_changed():
+	filtr_input.placeholder_text = debug_tool.local.get_str("filter_properties_tip")
 	pass
 
 func _process(delta):
@@ -122,13 +128,13 @@ func set_view_node(node: Node):
 func _init_node_attr():
 	var title = line.instantiate();
 	add_child(title)
-	title.set_title("基础属性")
+	title.set_title(debug_tool.local.get_str("basic_properties"))
 
 	# 节点名称
-	_create_label_attr(_curr_node, "名称：", _curr_node.name)
+	_create_label_attr(_curr_node, debug_tool.local.get_str("name") + "：", _curr_node.name)
 	
 	# 节点类型
-	_create_label_attr(_curr_node, "类型：", _curr_node.get_class())
+	_create_label_attr(_curr_node, debug_tool.local.get_str("type") + "：", _curr_node.get_class())
 	
 	# _curr_node.name
 	var path: String = ""
@@ -140,20 +146,20 @@ func _init_node_attr():
 			path = curr.name + "/" + path
 		curr = curr.get_parent()
 	
-	_create_label_attr(_curr_node, "路径：", path)
+	_create_label_attr(_curr_node, debug_tool.local.get_str("path") + "：", path)
 	
 	if _curr_node.scene_file_path != "":
-		_create_label_attr(_curr_node, "场景：", _curr_node.scene_file_path)
+		_create_label_attr(_curr_node, debug_tool.local.get_str("scene") + "：", _curr_node.scene_file_path)
 	
 	var props: Array[Dictionary] = _curr_node.get_property_list()
 
 	var script: Script = _curr_node.get_script()
 	if script != null:
-		_create_label_attr(_curr_node, "脚本：", script.get_path())
+		_create_label_attr(_curr_node, debug_tool.local.get_str("script") + "：", script.get_path())
 
 		var title2 = line.instantiate();
 		add_child(title2)
-		title2.set_title("脚本导出属性")
+		title2.set_title(debug_tool.local.get_str("script_exported_properties"))
 		
 		for prop in props:
 			if prop.usage & PROPERTY_USAGE_SCRIPT_VARIABLE and prop.usage & PROPERTY_USAGE_EDITOR: # PROPERTY_USAGE_STORAGE   PROPERTY_USAGE_SCRIPT_VARIABLE
@@ -161,7 +167,7 @@ func _init_node_attr():
 		
 		var title4 = line.instantiate();
 		add_child(title4)
-		title4.set_title("脚本属性")
+		title4.set_title(debug_tool.local.get_str("script_properties"))
 		
 		for prop in props:
 			if prop.usage & PROPERTY_USAGE_SCRIPT_VARIABLE and not prop.usage & PROPERTY_USAGE_EDITOR: # PROPERTY_USAGE_STORAGE   PROPERTY_USAGE_SCRIPT_VARIABLE
@@ -169,7 +175,7 @@ func _init_node_attr():
 	
 	var title3 = line.instantiate();
 	add_child(title3)
-	title3.set_title("内置属性")
+	title3.set_title(debug_tool.local.get_str("built_in_properties"))
 
 	for prop in props:
 		if prop.usage & PROPERTY_USAGE_EDITOR and not prop.usage & PROPERTY_USAGE_SCRIPT_VARIABLE:

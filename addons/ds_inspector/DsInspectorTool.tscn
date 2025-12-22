@@ -209,13 +209,13 @@ size_flags_horizontal = 3
 [node name="PlayNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "暂停/运行游戏"
+tooltip_text = "Play/Stop"
 icon = ExtResource("4_qjgja")
 
 [node name="NextFrameNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "运行到下一帧"
+tooltip_text = "Next Frame"
 disabled = true
 icon = ExtResource("5_albym")
 
@@ -241,7 +241,7 @@ color = Color(0.27451, 0.27451, 0.27451, 1)
 [node name="PrevNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "上一个选中的节点"
+tooltip_text = "Previous Selected Node"
 disabled = true
 icon = ExtResource("6_nr4t2")
 expand_icon = true
@@ -249,7 +249,7 @@ expand_icon = true
 [node name="NextNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "下一个选中的节点"
+tooltip_text = "Next Selected Node"
 disabled = true
 icon = ExtResource("7_nnel7")
 expand_icon = true
@@ -276,14 +276,14 @@ color = Color(0.27451, 0.27451, 0.27451, 1)
 [node name="SaveNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "保存选中的节点"
+tooltip_text = "Save Selected Node"
 icon = ExtResource("6_trprb")
 expand_icon = true
 
 [node name="DeleteNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "删除选中的节点"
+tooltip_text = "Delete Selected Node"
 icon = ExtResource("7_feklu")
 expand_icon = true
 
@@ -309,22 +309,22 @@ color = Color(0.27451, 0.27451, 0.27451, 1)
 [node name="SelectNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "拣选场景中的节点"
-text = "拣选"
+tooltip_text = "pick_selected_node"
+text = "Pick"
 icon = ExtResource("8_vxxi0")
 
 [node name="HideBorderNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "关闭调试绘制的边框"
-text = "关闭轮廓"
+tooltip_text = "Close Debug Border"
+text = "Close Contour"
 icon = ExtResource("9_n43st")
 
 [node name="PutAwayNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "收起场景树"
-text = "收起"
+tooltip_text = "Collapse Scene Tree"
+text = "Collapse"
 icon = ExtResource("10_h81ki")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -348,15 +348,15 @@ layout_mode = 2
 [node name="SearchInput" type="LineEdit" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "请输入节点名称"
+placeholder_text = "Please Enter Node Name"
 
 [node name="Search" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/HBoxContainer"]
 layout_mode = 2
-text = "搜索"
+text = "Search"
 
 [node name="ClearSearch" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/HBoxContainer"]
 layout_mode = 2
-text = "清除"
+text = "Clear"
 
 [node name="VSplitContainer" type="VSplitContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer"]
 layout_mode = 2
@@ -412,7 +412,7 @@ collapse_icon_tex = ExtResource("14_lsm7a")
 
 [node name="RecordLabel" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/RecordRoot/HBoxContainer"]
 layout_mode = 2
-text = "记录节点实例"
+text = "Record Node Instance"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/RecordRoot"]
 visible = false
@@ -433,7 +433,7 @@ debug_tool = NodePath("../../../../../../../../../../..")
 [node name="TipLabel" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/RecordRoot/ScrollContainer/RecordContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "拖拽节点放入此区域"
+text = "Drag node here"
 horizontal_alignment = 1
 text_overrun_behavior = 3
 
@@ -492,7 +492,7 @@ debug_tool = NodePath("../../../../../../../../../../../..")
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
-metadata/_tab_name = "收藏路径"
+metadata/_tab_name = "Collect Path"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/CollectContainer"]
 layout_mode = 2
@@ -501,25 +501,26 @@ layout_mode = 2
 layout_mode = 2
 text = "添加选中的节点"
 
-[node name="Label" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/CollectContainer/HBoxContainer"]
+[node name="CollectLabel" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/CollectContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "收藏的节点点击时可以被快速选中。"
 text_overrun_behavior = 3
 
-[node name="Collect" type="Tree" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/CollectContainer"]
+[node name="Collect" type="Tree" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/CollectContainer" node_paths=PackedStringArray("add_btn", "collect_label", "debug_tool")]
 layout_mode = 2
 size_flags_vertical = 3
 hide_root = true
 script = ExtResource("21_6n43x")
-add_btn_path = NodePath("../HBoxContainer/AddButton")
-debug_tool_path = NodePath("../../../../../../../../..")
+add_btn = NodePath("../HBoxContainer/AddButton")
+collect_label = NodePath("../HBoxContainer/CollectLabel")
+debug_tool = NodePath("../../../../../../../../..")
 
 [node name="ExcludeContainer" type="VBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
-metadata/_tab_name = "排除路径"
+metadata/_tab_name = "Exclude Path"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/ExcludeContainer"]
 layout_mode = 2
@@ -528,26 +529,29 @@ layout_mode = 2
 layout_mode = 2
 text = "添加选中的节点"
 
-[node name="Label" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/ExcludeContainer/HBoxContainer"]
+[node name="ExcludeLabel" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/ExcludeContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "被排除的节点不会在拣选时被选中。"
 text_overrun_behavior = 3
 
-[node name="Exclude" type="Tree" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/ExcludeContainer"]
+[node name="Exclude" type="Tree" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/ExcludeContainer" node_paths=PackedStringArray("add_btn", "exclude_label", "debug_tool")]
 layout_mode = 2
 size_flags_vertical = 3
 hide_root = true
 script = ExtResource("16_lfkxp")
-add_btn_path = NodePath("../HBoxContainer/AddButton")
-debug_tool_path = NodePath("../../../../../../../../..")
+add_btn = NodePath("../HBoxContainer/AddButton")
+exclude_label = NodePath("../HBoxContainer/ExcludeLabel")
+debug_tool = NodePath("../../../../../../../../..")
 
-[node name="Cheat" type="VBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer" node_paths=PackedStringArray("cheat_list")]
+[node name="Cheat" type="VBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer" node_paths=PackedStringArray("cheat_list", "cheat_label", "debug_tool")]
 visible = false
 layout_mode = 2
 script = ExtResource("17_i1g1n")
 cheat_package_scene = ExtResource("18_req58")
 cheat_list = NodePath("Container/Scroll/MarginContainer/CheatList")
+cheat_label = NodePath("CheatTips")
+debug_tool = NodePath("../../../../../../../..")
 metadata/_tab_index = 2
 metadata/_tab_name = "作弊"
 
@@ -589,7 +593,7 @@ visible = false
 layout_mode = 2
 size_flags_vertical = 3
 color = Color(0.129412, 0.14902, 0.180392, 1)
-metadata/_tab_name = "设置"
+metadata/_tab_name = "Settings"
 
 [node name="Scroll" type="ScrollContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container"]
 layout_mode = 1
@@ -826,6 +830,7 @@ offset_right = 781.0
 offset_bottom = -87.0
 grow_horizontal = 2
 grow_vertical = 0
+pivot_offset = Vector2(780.5, 27)
 size_flags_vertical = 0
 theme = ExtResource("2_rwegl")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)

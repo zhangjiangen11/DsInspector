@@ -46,5 +46,10 @@
     "are_you_sure_you_want_to_delete_the_selected_node": "确定要删除选中的节点吗？",
     "unable_to_find_node_with_path_0": "无法找到路径为 '{0}' 的节点",
     "missed_the_selected_node_mac": "错过了选中的节点？\n按住Command在点击鼠标左键可以回溯选择的节点！",
-    "missed_the_selected_node_win": "错过了选中的节点？\n按住Ctrl在点击鼠标左键可以回溯选择的节点！"
+    "missed_the_selected_node_win": "错过了选中的节点？\n按住Ctrl在点击鼠标左键可以回溯选择的节点！",
+    "name": "名称",
+    "type": "类型",
+    "path": "路径",
+    "scene": "场景",
+    "script": "脚本"
 }
