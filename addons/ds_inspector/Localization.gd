@@ -1,5 +1,6 @@
 @tool
 extends Node
+class_name DsLocalization
 
 # 信号，当语言改变时发出
 signal change_language

@@ -16,10 +16,6 @@ static var editor_instance: DsInspectorPlugin = null
 
 func _enter_tree():
 	editor_instance = self
-	# 创建工具菜单
-	tool_menu = PopupMenu.new()
-	tool_menu.add_check_item("在编辑器运行", 0)
-	tool_menu.add_check_item("在游戏中运行", 1)
 
 	DsSaveConfig.save_path = "user://ds_inspector_config.json"
 	var client_config = DsSaveConfig.new()
@@ -34,6 +30,13 @@ func _enter_tree():
 	save_config = DsSaveConfig.new()
 	add_child(save_config)
 
+	var local = DsLocalization.new()
+
+	# 创建工具菜单
+	tool_menu = PopupMenu.new()
+	tool_menu.add_check_item(local.get_str("editor_run"), 0)
+	tool_menu.add_check_item(local.get_str("game_run"), 1)
+
 	tool_menu.set_item_checked(0, save_config.get_enable_in_editor())
 	tool_menu.set_item_checked(1, save_config.get_enable_in_game())
 
@@ -45,6 +48,8 @@ func _enter_tree():
 
 	_refresh_debug_tool(save_config.get_enable_in_editor())
 	_refresh_debug_tool_in_game(save_config.get_enable_in_game())
+
+	local.free()
 
 func _exit_tree():
 	# 停止HTTP服务器
@@ -256,7 +261,7 @@ func _parse_query_string(query: String) -> Dictionary:
 ## 在编辑器中打开脚本
 func _open_script_in_editor(script_path: String):
 	if script_path.is_empty():
-		print("DsInspector: 脚本路径为空")
+		print("DsInspector: Script path is empty")
 		return
 	
 	# URL解码
@@ -264,11 +269,11 @@ func _open_script_in_editor(script_path: String):
 	
 	var script: Script = load(script_path)
 	if script == null:
-		print("DsInspector: 无法加载脚本: ", script_path)
+		print("DsInspector: Failed to load script: ", script_path)
 		return
 	
 	call_deferred("_do_open_script", script)
-	print("DsInspector: 请求打开脚本: ", script_path)
+	print("DsInspector: Request to open script: ", script_path)
 
 func _do_open_script(script: Script):
 	get_editor_interface().edit_resource(script)
@@ -277,14 +282,14 @@ func _do_open_script(script: Script):
 ## 在编辑器中打开场景
 func _open_scene_in_editor(scene_path: String):
 	if scene_path.is_empty():
-		print("DsInspector: 场景路径为空")
+		print("DsInspector: Scene path is empty")
 		return
 	
 	# URL解码
 	scene_path = scene_path.uri_decode()
 	
 	call_deferred("_do_open_scene", scene_path)
-	print("DsInspector: 请求打开场景: ", scene_path)
+	print("DsInspector: Request to open scene: ", scene_path)
 
 func _do_open_scene(scene_path: String):
 	get_editor_interface().open_scene_from_path(scene_path)

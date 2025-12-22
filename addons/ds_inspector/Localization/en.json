@@ -78,5 +78,8 @@
     "shortcut_toggle_selected_node": "Toggle Selected Node",
     "shortcut_record_node_instance": "Record Node Instance",
     "shortcut_collect_path": "Collect Path",
-    "shortcut_exclude_path": "Exclude Path"
+    "shortcut_exclude_path": "Exclude Path",
+    "editor_run": "Run in Editor",
+    "game_run": "Run in Game"
+    
 }
