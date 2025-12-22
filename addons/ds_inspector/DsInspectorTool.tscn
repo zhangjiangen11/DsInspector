@@ -151,10 +151,11 @@ grow_vertical = 2
 
 [node name="WindowDialog" type="Window" parent="." node_paths=PackedStringArray("tree", "exclude_list", "select_btn", "prev_btn", "next_btn", "save_btn", "delete_btn", "hide_border_btn", "play_btn", "next_frame_btn", "file_window", "put_away", "confirmation", "debug_tool")]
 title = "DsInspector"
-position = Vector2i(2168, 958)
-size = Vector2i(2472, 1724)
+position = Vector2i(2008, 508)
+size = Vector2i(1940, 1704)
 visible = false
 transient = true
+content_scale_factor = 1.5
 theme = ExtResource("2_rwegl")
 script = ExtResource("3_d06wy")
 tree = NodePath("Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/TreeRoot/NodeTree")
@@ -317,7 +318,7 @@ icon = ExtResource("8_vxxi0")
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
 tooltip_text = "Close Debug Border"
-text = "Close Contour"
+text = "Disable Outline"
 icon = ExtResource("9_n43st")
 
 [node name="PutAwayNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -658,12 +659,18 @@ custom_minimum_size = Vector2(75, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
-item_count = 2
-selected = 1
+item_count = 5
+selected = 3
 popup/item_0/text = "中文"
 popup/item_0/id = 0
-popup/item_1/text = "English"
+popup/item_1/text = "日本語"
 popup/item_1/id = 1
+popup/item_2/text = "Русский"
+popup/item_2/id = 2
+popup/item_3/text = "English"
+popup/item_3/id = 3
+popup/item_4/text = "Español"
+popup/item_4/id = 4
 
 [node name="SettingItem4" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList"]
 layout_mode = 2
@@ -683,7 +690,7 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
 item_count = 9
-selected = 2
+selected = 4
 popup/item_0/text = "50%"
 popup/item_0/id = 0
 popup/item_1/text = "75%"
@@ -821,6 +828,14 @@ debug_tool = NodePath("../../../../../../../../../../../..")
 [node name="Title" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/ShortcutKeySetting/HBoxContainer" index="0"]
 text = "Enable Keyboard Shortcuts"
 
+[node name="CheckBox" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/ShortcutKeySetting/HBoxContainer" index="1"]
+button_pressed = true
+
+[node name="ShortcutKeyDialog" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/ShortcutKeySetting" index="2"]
+title = "Record Shortcut Keys"
+ok_button_text = "Confirm"
+cancel_button_text = "Cancel"
+
 [node name="SaveFileDialog" type="FileDialog" parent="."]
 title = "保存场景"
 position = Vector2i(380, 36)
@@ -834,12 +849,11 @@ filters = PackedStringArray("*.tscn")
 use_native_dialog = true
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
-title = "你确定吗？"
+title = "Are you sure?"
 initial_position = 1
 size = Vector2i(200, 158)
 theme = ExtResource("2_rwegl")
-ok_button_text = "确定"
-cancel_button_text = "取消"
+ok_button_text = "Confirm"
 
 [node name="Brush" type="Node2D" parent="." node_paths=PackedStringArray("golobal_path_tips", "debug_tool")]
 script = ExtResource("19_1ycqc")
@@ -878,10 +892,8 @@ libraries = {
 }
 
 [node name="HoverIcon" type="TextureButton" parent="."]
-offset_left = 1966.0
-offset_top = 41.0
-offset_right = 2014.0
-offset_bottom = 89.0
+offset_right = 48.0
+offset_bottom = 48.0
 texture_normal = ExtResource("21_pv2ua")
 texture_pressed = ExtResource("22_0afkq")
 texture_hover = ExtResource("23_qya0n")

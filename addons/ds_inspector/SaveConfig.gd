@@ -26,7 +26,7 @@ class ConfigData:
 	# 快捷键数据
 	var shortcut_key_data: ShortcutKeyData = ShortcutKeyData.new()
 	# 语言设置
-	var language: String = "en"
+	var language: String = ""
 # 快捷键数据
 class ShortcutKeyData:
 	# 隐藏/显示窗口：f5
@@ -177,8 +177,8 @@ func _deserialize_value(value) -> Variant:
 	var use_shortcut_key = value.get("use_shortcut_key", false)
 	config.use_shortcut_key = use_shortcut_key if use_shortcut_key != null else false
 	# 处理可能为 null 的语言字段
-	var language = value.get("language", "en")
-	config.language = language if language != null else "en"	# 处理快捷键数据
+	var language = value.get("language", "")
+	config.language = language if language != null else ""	# 处理快捷键数据
 	var shortcut_data = value.get("shortcut_key_data", {})
 	if shortcut_data is Dictionary and shortcut_data.size() > 0:
 		config.shortcut_key_data = ShortcutKeyData.new()
