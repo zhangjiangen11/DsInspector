@@ -93,6 +93,9 @@ func _ready():
 	if !debug_tool:
 		return
 	
+	debug_tool.local.change_language.connect(_on_language_changed)
+	_on_language_changed()
+	
 	# 初始化弹窗
 	_setup_dialog()
 	
@@ -121,6 +124,9 @@ func _ready():
 	
 	# 加载并显示当前的快捷键
 	_load_shortcuts()
+
+func _on_language_changed():
+	pass
 
 func _exit_tree():
 	"""节点退出时清理 Input Actions"""

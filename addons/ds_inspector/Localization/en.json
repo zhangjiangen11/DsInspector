@@ -51,5 +51,14 @@
     "type": "Type",
     "path": "Path",
     "scene": "Scene",
-    "script": "Script"
+    "script": "Script",
+    "language": "Language",
+    "ui_scale": "UI Scale",
+    "auto_open_dialog_on_game_start": "Auto Open Dialog on Game Start",
+    "use_native_dialog": "Use Native Dialog (affects all dialogs, takes effect on next game start)",
+    "scene_tree_auto_search": "Scene Tree Auto Search (may cause lag)",
+    "allow_pick_viewport_window": "Allow Pick Viewport/Window Nodes (creates draw nodes under viewport)",
+    "remote_notify_godot_editor": "Remote Notify Godot Editor to Open Scene/Script (starts a server, requires editor restart)",
+    "server_port": "Server Port:",
+    "enable_keyboard_shortcuts": "Enable Keyboard Shortcuts"
 }

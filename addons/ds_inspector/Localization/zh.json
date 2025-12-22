@@ -51,5 +51,14 @@
     "type": "类型",
     "path": "路径",
     "scene": "场景",
-    "script": "脚本"
+    "script": "脚本",
+    "language": "语言",
+    "ui_scale": "Ui整体缩放",
+    "auto_open_dialog_on_game_start": "启动游戏自动打弹窗",
+    "use_native_dialog": "使用系统原生弹窗（会影响游戏中所有弹窗，下一次启动游戏生效）",
+    "scene_tree_auto_search": "场景树自动搜索（可能造成卡顿）",
+    "allow_pick_viewport_window": "允许拣选Viewport、Window节点（会在视窗下生成绘制节点）",
+    "remote_notify_godot_editor": "远程通知Godot编辑器打开场景、脚本，该设置会开启一个服务器（需要重启编辑器）",
+    "server_port": "服务端口：",
+    "enable_keyboard_shortcuts": "启用键盘快捷键"
 }

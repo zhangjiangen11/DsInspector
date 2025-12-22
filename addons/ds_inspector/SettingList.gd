@@ -7,30 +7,57 @@ var debug_tool: CanvasLayer
 var tree_container: VBoxContainer
 
 @export
+var local_label: Label
+@export
+var local_option: OptionButton
+
+@export
+var use_system_window_label: Label
+@export
 var use_system_window_checkbox: CheckBox
+
+@export
+var auto_open_label: Label
 @export
 var auto_open_checkbox: CheckBox
+
+@export
+var auto_search_label: Label
 @export
 var auto_search_checkbox: CheckBox
+
+@export
+var scale_label: Label
 @export
 var scale_options: OptionButton
 
 @export
+var server_label: Label
+@export
 var server_checkbox: CheckBox
+
+@export
+var server_port_label: Label
 @export
 var server_port_input: LineEdit
 @export
 var server_port_container: HBoxContainer
 
 @export
+var check_viewport_label: Label
+@export
 var check_viewport_checkbox: CheckBox
 
+@export
+var shortcut_key_label: Label
 @export
 var shortcut_key_checkbox: CheckBox
 @export
 var shortcut_key_container: VBoxContainer
 
 func _ready():
+	debug_tool.local.change_language.connect(_on_language_changed)
+	_on_language_changed()
 	# 读取并设置 checkbox 状态
 	if !Engine.is_editor_hint():
 		use_system_window_checkbox.button_pressed = debug_tool.save_config.get_use_system_window()
@@ -40,6 +67,14 @@ func _ready():
 	else:
 		use_system_window_checkbox.get_parent().visible = false
 		server_port_container.get_parent().visible = false
+
+	# 访问 Localization.gd
+	var local = debug_tool.local
+	# 需要初始化 local_option 中的语言
+	_init_language_options()
+
+	# 绑定语言切换选项，然后要保存到配置文件中
+	local_option.item_selected.connect(_on_language_selected)
 
 	auto_open_checkbox.button_pressed = debug_tool.save_config.get_auto_open()
 	auto_open_checkbox.toggled.connect(_on_auto_open_toggled)
@@ -69,6 +104,16 @@ func _ready():
 
 	call_deferred("init_config")
 
+func _on_language_changed():
+	local_label.text = debug_tool.local.get_str("language")
+	use_system_window_label.text = debug_tool.local.get_str("use_native_dialog")
+	auto_open_label.text = debug_tool.local.get_str("auto_open_dialog_on_game_start")
+	auto_search_label.text = debug_tool.local.get_str("scene_tree_auto_search")
+	scale_label.text = debug_tool.local.get_str("ui_scale")
+	server_label.text = debug_tool.local.get_str("remote_notify_godot_editor")
+	server_port_label.text = debug_tool.local.get_str("server_port")
+	check_viewport_label.text = debug_tool.local.get_str("allow_pick_viewport_window")
+	shortcut_key_label.text = debug_tool.local.get_str("enable_keyboard_shortcuts")
 
 func init_config():
 	# 自动打开窗口
@@ -137,3 +182,41 @@ func _on_shortcut_key_toggled(enabled: bool):
 func _update_shortcut_key_visibility():
 	var enabled = debug_tool.save_config.get_use_shortcut_key()
 	shortcut_key_container.visible = enabled
+
+# 初始化语言选项
+func _init_language_options():
+	local_option.clear()
+	var local = debug_tool.local
+	
+	# 遍历所有可用语言并添加到选项中
+	var index = 0
+	var selected_index = 0
+	var saved_language = debug_tool.save_config.get_language()
+	
+	for locale_code in local.available_locales.keys():
+		var locale_name = local.available_locales[locale_code]
+		local_option.add_item(locale_name)
+		local_option.set_item_metadata(index, locale_code)
+		
+		# 检查是否是保存的语言
+		if locale_code == saved_language:
+			selected_index = index
+		
+		index += 1
+	
+	# 设置当前选中的语言
+	local_option.selected = selected_index
+	
+	# 应用保存的语言设置
+	if saved_language != "":
+		local.change_locale(saved_language)
+
+func _on_language_selected(index: int):
+	# 获取选中语言的代码
+	var locale_code = local_option.get_item_metadata(index)
+	
+	# 切换语言
+	debug_tool.local.change_locale(locale_code)
+	
+	# 保存到配置文件
+	debug_tool.save_config.set_language(locale_code)

@@ -613,28 +613,57 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="SettingList" type="VBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer" node_paths=PackedStringArray("debug_tool", "tree_container", "use_system_window_checkbox", "auto_open_checkbox", "auto_search_checkbox", "scale_options", "server_checkbox", "server_port_input", "server_port_container", "check_viewport_checkbox", "shortcut_key_checkbox", "shortcut_key_container")]
+[node name="SettingList" type="VBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer" node_paths=PackedStringArray("debug_tool", "tree_container", "local_label", "local_option", "use_system_window_label", "use_system_window_checkbox", "auto_open_label", "auto_open_checkbox", "auto_search_label", "auto_search_checkbox", "scale_label", "scale_options", "server_label", "server_checkbox", "server_port_label", "server_port_input", "server_port_container", "check_viewport_label", "check_viewport_checkbox", "shortcut_key_label", "shortcut_key_checkbox", "shortcut_key_container")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("19_s1270")
 debug_tool = NodePath("../../../../../../../../../../..")
 tree_container = NodePath("../../../../../TreeContainer")
+local_label = NodePath("SettingItem7/LocalTitle")
+local_option = NodePath("SettingItem7/OptionButton")
+use_system_window_label = NodePath("SettingItem/UseSystemTitle")
 use_system_window_checkbox = NodePath("SettingItem/CheckBox")
+auto_open_label = NodePath("SettingItem3/AutoOpenTitle")
 auto_open_checkbox = NodePath("SettingItem3/CheckBox")
+auto_search_label = NodePath("SettingItem2/AutoSearchTitle")
 auto_search_checkbox = NodePath("SettingItem2/CheckBox")
+scale_label = NodePath("SettingItem4/ScaleTitle")
 scale_options = NodePath("SettingItem4/OptionButton")
+server_label = NodePath("SettingItem5/HBoxContainer/OpenServerTitle")
 server_checkbox = NodePath("SettingItem5/HBoxContainer/CheckBox")
+server_port_label = NodePath("SettingItem5/HBoxContainer2/ServerPortTitle")
 server_port_input = NodePath("SettingItem5/HBoxContainer2/ServerPort")
 server_port_container = NodePath("SettingItem5/HBoxContainer2")
+check_viewport_label = NodePath("SettingItem6/PickViewportTitle")
 check_viewport_checkbox = NodePath("SettingItem6/CheckBox")
+shortcut_key_label = NodePath("ShortcutKeySetting/HBoxContainer/Title")
 shortcut_key_checkbox = NodePath("ShortcutKeySetting/HBoxContainer/CheckBox")
 shortcut_key_container = NodePath("ShortcutKeySetting/VBoxContainer2")
+
+[node name="SettingItem7" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList"]
+layout_mode = 2
+
+[node name="LocalTitle" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem7"]
+custom_minimum_size = Vector2(150, 27)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 5
+size_flags_stretch_ratio = 8.0
+text = "语言"
+autowrap_mode = 3
+
+[node name="OptionButton" type="OptionButton" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem7"]
+custom_minimum_size = Vector2(75, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+selected = 2
 
 [node name="SettingItem4" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem4"]
+[node name="ScaleTitle" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem4"]
 custom_minimum_size = Vector2(150, 27)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -672,7 +701,7 @@ popup/item_8/id = 8
 [node name="SettingItem3" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem3"]
+[node name="AutoOpenTitle" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem3"]
 custom_minimum_size = Vector2(150, 27)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -687,10 +716,9 @@ size_flags_horizontal = 10
 size_flags_vertical = 0
 
 [node name="SettingItem" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList"]
-visible = false
 layout_mode = 2
 
-[node name="Title" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem"]
+[node name="UseSystemTitle" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem"]
 custom_minimum_size = Vector2(150, 27)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -707,7 +735,7 @@ size_flags_vertical = 0
 [node name="SettingItem2" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem2"]
+[node name="AutoSearchTitle" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem2"]
 custom_minimum_size = Vector2(150, 27)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -724,7 +752,7 @@ size_flags_vertical = 0
 [node name="SettingItem6" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem6"]
+[node name="PickViewportTitle" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem6"]
 custom_minimum_size = Vector2(150, 27)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -746,7 +774,7 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem5"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem5/HBoxContainer"]
+[node name="OpenServerTitle" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem5/HBoxContainer"]
 custom_minimum_size = Vector2(150, 27)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -764,7 +792,7 @@ size_flags_vertical = 0
 visible = false
 layout_mode = 2
 
-[node name="Title" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem5/HBoxContainer2"]
+[node name="ServerPortTitle" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem5/HBoxContainer2"]
 custom_minimum_size = Vector2(150, 27)
 layout_mode = 2
 size_flags_horizontal = 3

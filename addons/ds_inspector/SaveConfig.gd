@@ -25,7 +25,8 @@ class ConfigData:
 	var use_shortcut_key: bool = false
 	# 快捷键数据
 	var shortcut_key_data: ShortcutKeyData = ShortcutKeyData.new()
-
+	# 语言设置
+	var language: String = "en"
 # 快捷键数据
 class ShortcutKeyData:
 	# 隐藏/显示窗口：f5
@@ -112,6 +113,7 @@ func _serialize_value(value) -> Variant:
 			"server_port": value.server_port,
 			"check_viewport": value.check_viewport,
 			"use_shortcut_key": value.use_shortcut_key,
+			"language": value.language,
 			"shortcut_key_data": {
 				"toggle_window": value.shortcut_key_data.toggle_window,
 				"pause_play": value.shortcut_key_data.pause_play,
@@ -174,7 +176,9 @@ func _deserialize_value(value) -> Variant:
 	# 处理可能为 null 的快捷键字段
 	var use_shortcut_key = value.get("use_shortcut_key", false)
 	config.use_shortcut_key = use_shortcut_key if use_shortcut_key != null else false
-	# 处理快捷键数据
+	# 处理可能为 null 的语言字段
+	var language = value.get("language", "en")
+	config.language = language if language != null else "en"	# 处理快捷键数据
 	var shortcut_data = value.get("shortcut_key_data", {})
 	if shortcut_data is Dictionary and shortcut_data.size() > 0:
 		config.shortcut_key_data = ShortcutKeyData.new()
@@ -634,3 +638,14 @@ func set_disable_outline_shortcut(keycode: int, ctrl: bool = false, alt: bool = 
 # 获取关闭绘制轮廓快捷键
 func get_disable_outline_shortcut() -> Dictionary:
 	return _config_data.shortcut_key_data.disable_outline
+
+# ==================== 语言设置相关 ====================
+
+# 设置语言
+func set_language(language: String) -> void:
+	_config_data.language = language
+	_needs_save = true
+
+# 获取语言
+func get_language() -> String:
+	return _config_data.language
