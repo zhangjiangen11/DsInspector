@@ -363,7 +363,7 @@ func calc_node_rect(node: Node) -> DsNodeTransInfo:
 			var texture: Texture2D = node.texture
 			if texture:
 				var _scale: Vector2 = node.global_scale
-				var _offset: Vector2 = node.offset * scale
+				var _offset: Vector2 = node.offset * _scale
 				var size: Vector2 = Vector2.ZERO
 				var h = max(1, node.hframes)
 				var v = max(1, node.vframes)

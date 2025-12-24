@@ -78,7 +78,7 @@ func _on_language_changed():
 	save_btn.tooltip_text = debug_tool.local.get_str("save_selected_node")
 	delete_btn.tooltip_text = debug_tool.local.get_str("delete_selected_node")
 	select_btn.text = debug_tool.local.get_str("pick")
-	select_btn.tooltip_text = debug_tool.local.get_str("pick_selected_node")
+	select_btn.tooltip_text = debug_tool.local.get_str("pick_node_in_scene")
 	hide_border_btn.text = debug_tool.local.get_str("close_contour")
 	hide_border_btn.tooltip_text = debug_tool.local.get_str("close_debug_border")
 	put_away.text = debug_tool.local.get_str("collapse")

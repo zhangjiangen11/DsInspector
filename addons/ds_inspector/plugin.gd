@@ -31,6 +31,7 @@ func _enter_tree():
 	add_child(save_config)
 
 	var local = DsLocalization.new()
+	local.change_locale(save_config.get_language())
 
 	# 创建工具菜单
 	tool_menu = PopupMenu.new()
