@@ -80,5 +80,6 @@
     "shortcut_collect_path": "Guardar Ruta Actual",
     "shortcut_exclude_path": "Excluir Ruta Actual",
     "editor_run": "Ejecutar en Editor",
-    "game_run": "Ejecutar en Juego"
+    "game_run": "Ejecutar en Juego",
+    "feedback_on_github": "Comentar en Github"
 }

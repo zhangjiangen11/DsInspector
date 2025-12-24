@@ -80,5 +80,6 @@
     "shortcut_collect_path": "Добавить текущий путь",
     "shortcut_exclude_path": "Исключить текущий путь",
     "editor_run": "Запуск в редакторе",
-    "game_run": "Запуск в игре"
+    "game_run": "Запуск в игре",
+    "feedback_on_github": "Сообщить о проблеме на Github"
 }

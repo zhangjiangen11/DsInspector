@@ -46,12 +46,14 @@ class ArrayWrapper:
 	func _init(arr: Array):
 		array = arr
 	
+	@warning_ignore("native_method_override")
 	func get(index):
 		var idx = int(index)
 		if idx >= 0 and idx < array.size():
 			return array[idx]
 		return null
 	
+	@warning_ignore("native_method_override")
 	func set(index, value):
 		var idx = int(index)
 		if idx >= 0 and idx < array.size():

@@ -80,5 +80,6 @@
     "shortcut_collect_path": "收藏当前路径",
     "shortcut_exclude_path": "排除当前路径",
     "editor_run": "在编辑器运行",
-    "game_run": "在游戏中运行"
+    "game_run": "在游戏中运行",
+    "feedback_on_github": "Github上反馈问题"
 }

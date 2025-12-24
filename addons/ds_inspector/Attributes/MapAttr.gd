@@ -55,6 +55,7 @@ class DictWrapper:
 			var str_key = str(key)
 			key_map[str_key] = key
 	
+	@warning_ignore("native_method_override")
 	func get(key):
 		# 如果传入的是字符串形式的键，先转换为原始键
 		var original_key = key_map.get(str(key), key)
@@ -62,6 +63,7 @@ class DictWrapper:
 			return dict[original_key]
 		return null
 	
+	@warning_ignore("native_method_override")
 	func set(key, value):
 		# 如果传入的是字符串形式的键，先转换为原始键
 		var original_key = key_map.get(str(key), key)

@@ -151,11 +151,10 @@ grow_vertical = 2
 
 [node name="WindowDialog" type="Window" parent="." node_paths=PackedStringArray("tree", "exclude_list", "select_btn", "prev_btn", "next_btn", "save_btn", "delete_btn", "hide_border_btn", "play_btn", "next_frame_btn", "file_window", "put_away", "confirmation", "debug_tool")]
 title = "DsInspector"
-position = Vector2i(2008, 508)
-size = Vector2i(1940, 1704)
+position = Vector2i(320, 224)
+size = Vector2i(956, 739)
 visible = false
 transient = true
-content_scale_factor = 1.5
 theme = ExtResource("2_rwegl")
 script = ExtResource("3_d06wy")
 tree = NodePath("Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/TreeRoot/NodeTree")
@@ -210,13 +209,13 @@ size_flags_horizontal = 3
 [node name="PlayNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "Play/Stop"
+tooltip_text = "播放/停止"
 icon = ExtResource("4_qjgja")
 
 [node name="NextFrameNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "Next Frame"
+tooltip_text = "下一帧"
 disabled = true
 icon = ExtResource("5_albym")
 
@@ -242,7 +241,7 @@ color = Color(0.27451, 0.27451, 0.27451, 1)
 [node name="PrevNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "Previous Selected Node"
+tooltip_text = "上一个选中的节点"
 disabled = true
 icon = ExtResource("6_nr4t2")
 expand_icon = true
@@ -250,7 +249,7 @@ expand_icon = true
 [node name="NextNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "Next Selected Node"
+tooltip_text = "下一个选中的节点"
 disabled = true
 icon = ExtResource("7_nnel7")
 expand_icon = true
@@ -277,14 +276,14 @@ color = Color(0.27451, 0.27451, 0.27451, 1)
 [node name="SaveNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "Save Selected Node"
+tooltip_text = "保存选中的节点"
 icon = ExtResource("6_trprb")
 expand_icon = true
 
 [node name="DeleteNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "Delete Selected Node"
+tooltip_text = "删除选中的节点"
 icon = ExtResource("7_feklu")
 expand_icon = true
 
@@ -311,21 +310,21 @@ color = Color(0.27451, 0.27451, 0.27451, 1)
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
 tooltip_text = "pick_selected_node"
-text = "Pick"
+text = "拣选"
 icon = ExtResource("8_vxxi0")
 
 [node name="HideBorderNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "Close Debug Border"
-text = "Disable Outline"
+tooltip_text = "关闭调试绘制的边框"
+text = "关闭轮廓"
 icon = ExtResource("9_n43st")
 
 [node name="PutAwayNode" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(29, 29)
 layout_mode = 2
-tooltip_text = "Collapse Scene Tree"
-text = "Collapse"
+tooltip_text = "收起场景树"
+text = "收起"
 icon = ExtResource("10_h81ki")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer"]
@@ -349,15 +348,15 @@ layout_mode = 2
 [node name="SearchInput" type="LineEdit" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Please Enter Node Name"
+placeholder_text = "请输入节点名称"
 
 [node name="Search" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/HBoxContainer"]
 layout_mode = 2
-text = "Search"
+text = "搜索"
 
 [node name="ClearSearch" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/HBoxContainer"]
 layout_mode = 2
-text = "Clear"
+text = "清除"
 
 [node name="VSplitContainer" type="VSplitContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer"]
 layout_mode = 2
@@ -413,7 +412,7 @@ collapse_icon_tex = ExtResource("14_lsm7a")
 
 [node name="RecordLabel" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/RecordRoot/HBoxContainer"]
 layout_mode = 2
-text = "Record Node Instance"
+text = "记录节点实例"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/RecordRoot"]
 visible = false
@@ -434,7 +433,7 @@ debug_tool = NodePath("../../../../../../../../../../..")
 [node name="TipLabel" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TreeContainer/VSplitContainer/RecordRoot/ScrollContainer/RecordContainer"]
 layout_mode = 2
 size_flags_vertical = 6
-text = "Drag node here"
+text = "拖拽节点放入此区域"
 horizontal_alignment = 1
 text_overrun_behavior = 3
 
@@ -454,7 +453,7 @@ metadata/_tab_name = "检查器"
 [node name="FiltrInput" type="LineEdit" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Inspector"]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Filter properties, use \"|\" to filter multiple properties at the same time"
+placeholder_text = "筛选属性，使用\"|\"同时筛选多个属性"
 
 [node name="BgColor" type="ColorRect" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Inspector"]
 layout_mode = 2
@@ -493,19 +492,19 @@ debug_tool = NodePath("../../../../../../../../../../../..")
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
-metadata/_tab_name = "Collect Path"
+metadata/_tab_name = "收藏路径"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/CollectContainer"]
 layout_mode = 2
 
 [node name="AddButton" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/CollectContainer/HBoxContainer"]
 layout_mode = 2
-text = "Add Selected Node"
+text = "添加选中的节点"
 
 [node name="CollectLabel" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/CollectContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Collected nodes can be quickly selected when clicked."
+text = "收藏的节点点击时可以被快速选中。"
 text_overrun_behavior = 3
 
 [node name="Collect" type="Tree" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/CollectContainer" node_paths=PackedStringArray("add_btn", "collect_label", "debug_tool")]
@@ -521,19 +520,19 @@ debug_tool = NodePath("../../../../../../../../..")
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
-metadata/_tab_name = "Exclude Path"
+metadata/_tab_name = "排除路径"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/ExcludeContainer"]
 layout_mode = 2
 
 [node name="AddButton" type="Button" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/ExcludeContainer/HBoxContainer"]
 layout_mode = 2
-text = "Add Selected Node"
+text = "添加选中的节点"
 
 [node name="ExcludeLabel" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/ExcludeContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Excluded nodes will not be selected during picking."
+text = "被排除的节点不会在拣选时被选中。"
 text_overrun_behavior = 3
 
 [node name="Exclude" type="Tree" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/ExcludeContainer" node_paths=PackedStringArray("add_btn", "exclude_label", "debug_tool")]
@@ -558,7 +557,7 @@ metadata/_tab_name = "作弊"
 
 [node name="CheatTips" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Cheat"]
 layout_mode = 2
-text = "Use DsInspector.add_cheat_button() to add cheat buttons"
+text = "使用 DsInspector.add_cheat_button() 添加做弊按钮"
 text_overrun_behavior = 3
 
 [node name="Container" type="ColorRect" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Cheat"]
@@ -594,7 +593,7 @@ visible = false
 layout_mode = 2
 size_flags_vertical = 3
 color = Color(0.129412, 0.14902, 0.180392, 1)
-metadata/_tab_name = "Settings"
+metadata/_tab_name = "设置"
 
 [node name="Scroll" type="ScrollContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container"]
 layout_mode = 1
@@ -614,7 +613,7 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="SettingList" type="VBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer" node_paths=PackedStringArray("debug_tool", "tree_container", "local_label", "local_option", "use_system_window_label", "use_system_window_checkbox", "auto_open_label", "auto_open_checkbox", "auto_search_label", "auto_search_checkbox", "scale_label", "scale_options", "server_label", "server_checkbox", "server_port_label", "server_port_input", "server_port_container", "check_viewport_label", "check_viewport_checkbox", "shortcut_key_label", "shortcut_key_checkbox", "shortcut_key_container")]
+[node name="SettingList" type="VBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer" node_paths=PackedStringArray("debug_tool", "tree_container", "local_label", "local_option", "use_system_window_label", "use_system_window_checkbox", "auto_open_label", "auto_open_checkbox", "auto_search_label", "auto_search_checkbox", "scale_label", "scale_options", "server_label", "server_checkbox", "server_port_label", "server_port_input", "server_port_container", "check_viewport_label", "check_viewport_checkbox", "shortcut_key_label", "shortcut_key_checkbox", "shortcut_key_container", "link_btn")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -641,6 +640,7 @@ check_viewport_checkbox = NodePath("SettingItem6/CheckBox")
 shortcut_key_label = NodePath("ShortcutKeySetting/HBoxContainer/Title")
 shortcut_key_checkbox = NodePath("ShortcutKeySetting/HBoxContainer/CheckBox")
 shortcut_key_container = NodePath("ShortcutKeySetting/VBoxContainer2")
+link_btn = NodePath("LinkContainer/LinkButton")
 
 [node name="SettingItem7" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList"]
 layout_mode = 2
@@ -651,7 +651,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "Language"
+text = "语言"
 autowrap_mode = 3
 
 [node name="OptionButton" type="OptionButton" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem7"]
@@ -660,16 +660,16 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
 item_count = 5
-selected = 3
-popup/item_0/text = "中文"
+selected = 4
+popup/item_0/text = "English"
 popup/item_0/id = 0
-popup/item_1/text = "日本語"
+popup/item_1/text = "Español"
 popup/item_1/id = 1
-popup/item_2/text = "Русский"
+popup/item_2/text = "日本語"
 popup/item_2/id = 2
-popup/item_3/text = "English"
+popup/item_3/text = "Русский"
 popup/item_3/id = 3
-popup/item_4/text = "Español"
+popup/item_4/text = "中文"
 popup/item_4/id = 4
 
 [node name="SettingItem4" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList"]
@@ -681,7 +681,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "UI Scale"
+text = "Ui整体缩放"
 autowrap_mode = 3
 
 [node name="OptionButton" type="OptionButton" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem4"]
@@ -690,7 +690,7 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
 item_count = 9
-selected = 4
+selected = 2
 popup/item_0/text = "50%"
 popup/item_0/id = 0
 popup/item_1/text = "75%"
@@ -719,7 +719,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "Auto Open Dialog on Game Start"
+text = "启动游戏自动打弹窗"
 autowrap_mode = 3
 
 [node name="CheckBox" type="CheckBox" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem3"]
@@ -737,7 +737,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "Use Native Dialog (affects all dialogs, takes effect on next game start)"
+text = "使用系统原生弹窗（会影响游戏中所有弹窗，下一次启动游戏生效）"
 autowrap_mode = 3
 
 [node name="CheckBox" type="CheckBox" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem"]
@@ -754,7 +754,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "Scene Tree Auto Search (may cause lag)"
+text = "场景树自动搜索（可能造成卡顿）"
 autowrap_mode = 3
 
 [node name="CheckBox" type="CheckBox" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem2"]
@@ -771,7 +771,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "Allow Pick Viewport/Window Nodes (creates draw nodes under viewport)"
+text = "允许拣选Viewport、Window节点（会在视窗下生成绘制节点）"
 autowrap_mode = 3
 
 [node name="CheckBox" type="CheckBox" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem6"]
@@ -793,16 +793,16 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "Remote Notify Godot Editor to Open Scene/Script (starts a server, requires editor restart)"
+text = "远程通知Godot编辑器打开场景、脚本，该设置会开启一个服务器（需要重启编辑器）"
 autowrap_mode = 3
 
 [node name="CheckBox" type="CheckBox" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem5/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
+button_pressed = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem5"]
-visible = false
 layout_mode = 2
 
 [node name="ServerPortTitle" type="Label" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/SettingItem5/HBoxContainer2"]
@@ -811,7 +811,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 8.0
-text = "Server Port:"
+text = "服务端口："
 horizontal_alignment = 2
 vertical_alignment = 1
 autowrap_mode = 3
@@ -825,16 +825,22 @@ placeholder_text = "服务器端口"
 layout_mode = 2
 debug_tool = NodePath("../../../../../../../../../../../..")
 
-[node name="Title" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/ShortcutKeySetting/HBoxContainer" index="0"]
-text = "Enable Keyboard Shortcuts"
+[node name="VBoxContainer2" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/ShortcutKeySetting" index="1"]
+visible = false
 
-[node name="CheckBox" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/ShortcutKeySetting/HBoxContainer" index="1"]
-button_pressed = true
+[node name="LinkContainer" type="VBoxContainer" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList"]
+layout_mode = 2
+size_flags_vertical = 3
 
-[node name="ShortcutKeyDialog" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/ShortcutKeySetting" index="2"]
-title = "Record Shortcut Keys"
-ok_button_text = "Confirm"
-cancel_button_text = "Cancel"
+[node name="Control" type="Control" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/LinkContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LinkButton" type="LinkButton" parent="WindowDialog/Bg/ScrollContainer/MarginContainer/VBoxContainer/HSplitContainer/TabContainer/Container/Scroll/MarginContainer/SettingList/LinkContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Github上反馈问题"
+uri = "https://github.com/xlljc/DsInspector"
 
 [node name="SaveFileDialog" type="FileDialog" parent="."]
 title = "保存场景"
@@ -849,11 +855,12 @@ filters = PackedStringArray("*.tscn")
 use_native_dialog = true
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
-title = "Are you sure?"
+title = "你确定吗？"
 initial_position = 1
 size = Vector2i(200, 158)
 theme = ExtResource("2_rwegl")
-ok_button_text = "Confirm"
+ok_button_text = "确定"
+cancel_button_text = "取消"
 
 [node name="Brush" type="Node2D" parent="." node_paths=PackedStringArray("golobal_path_tips", "debug_tool")]
 script = ExtResource("19_1ycqc")
@@ -892,7 +899,8 @@ libraries = {
 }
 
 [node name="HoverIcon" type="TextureButton" parent="."]
-offset_right = 48.0
+offset_left = 311.0
+offset_right = 359.0
 offset_bottom = 48.0
 texture_normal = ExtResource("21_pv2ua")
 texture_pressed = ExtResource("22_0afkq")

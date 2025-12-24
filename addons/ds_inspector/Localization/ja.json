@@ -80,5 +80,6 @@
     "shortcut_collect_path": "現在のパスを収集",
     "shortcut_exclude_path": "現在のパスを除外",
     "editor_run": "エディタで実行",
-    "game_run": "ゲームで実行"
+    "game_run": "ゲームで実行",
+    "feedback_on_github": "Githubで問題を報告"
 }

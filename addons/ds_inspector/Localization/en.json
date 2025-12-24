@@ -80,6 +80,7 @@
     "shortcut_collect_path": "Collect Path",
     "shortcut_exclude_path": "Exclude Path",
     "editor_run": "Run in Editor",
-    "game_run": "Run in Game"
+    "game_run": "Run in Game",
+    "feedback_on_github": "Feedback on Github"
     
 }

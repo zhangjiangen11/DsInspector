@@ -55,6 +55,9 @@ var shortcut_key_checkbox: CheckBox
 @export
 var shortcut_key_container: VBoxContainer
 
+@export
+var link_btn: LinkButton
+
 func _ready():
 	debug_tool.local.change_language.connect(_on_language_changed)
 	_on_language_changed()
@@ -114,6 +117,7 @@ func _on_language_changed():
 	server_port_label.text = debug_tool.local.get_str("server_port")
 	check_viewport_label.text = debug_tool.local.get_str("allow_pick_viewport_window")
 	shortcut_key_label.text = debug_tool.local.get_str("enable_keyboard_shortcuts")
+	link_btn.text = debug_tool.local.get_str("feedback_on_github")
 
 func init_config():
 	# 自动打开窗口
