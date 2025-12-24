@@ -10,7 +10,7 @@ func _ready():
 	item_selected.connect(_on_item_selected)
 	pass
 
-func set_node(node, inspector_container = null):
+func set_node(node, _inspector_container = null):
 	_node = node
 
 func set_enum_options(options: String):

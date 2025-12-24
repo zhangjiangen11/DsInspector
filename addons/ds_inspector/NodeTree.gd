@@ -260,7 +260,6 @@ class IconMapping:
 			return mapping["Node3D"]
 		return mapping["Node"]
 		# return "res://addons/ds_inspector/icon/icon_error_sign.png";
-		pass
 pass
 
 
@@ -380,7 +379,7 @@ func delete_selected():
 	if item:
 		var data: NodeData = item.get_metadata(0)
 		if data:
-			var parent: TreeItem = item.get_parent()
+			# var parent: TreeItem = item.get_parent()
 			if data.node:
 				data.node.queue_free()
 			item.free()
@@ -416,11 +415,11 @@ func locate_selected(select_node: Node):
 			var ch := curr_item.get_children()
 			var flag: bool = false
 			for child_item in ch:
-				var node_data: NodeData = child_item.get_metadata(0)
-				if !node_data: # 没有数据，错误
+				var node_data2: NodeData = child_item.get_metadata(0)
+				if !node_data2: # 没有数据，错误
 					_is_in_select_func = false
 					return
-				if node_data.node == node:
+				if node_data2.node == node:
 					flag = true
 					if i < count - 1: # 只展开路径上的父节点，不展开目标节点本身
 						child_item.collapsed = false
@@ -573,7 +572,7 @@ func _on_item_selected():
 			debug_tool.inspector.set_view_node(data.node)
 
 ## 点击按钮节点
-func _on_button_pressed(_item: TreeItem, _column: int, _id: int, mouse_button_index: int):
+func _on_button_pressed(_item: TreeItem, _column: int, _id: int, _mouse_button_index: int):
 	if !_item:
 		return
 	# 获取按钮对应的节点
@@ -733,7 +732,7 @@ func _get_drag_data_fw(_position: Vector2) -> Variant:
 	return null
 
 # 判断是否可以放置
-func _can_drop_data_fw(position: Vector2, drag_data: Variant) -> bool:
+func _can_drop_data_fw(_position: Vector2, drag_data: Variant) -> bool:
 	if typeof(drag_data) != TYPE_DICTIONARY:
 		return false
 	
@@ -750,7 +749,7 @@ func _can_drop_data_fw(position: Vector2, drag_data: Variant) -> bool:
 		return false
 	
 	# 获取目标位置的TreeItem
-	var target_item: TreeItem = get_item_at_position(position)
+	var target_item: TreeItem = get_item_at_position(_position)
 	if !target_item:
 		return false
 	
@@ -780,7 +779,7 @@ func _can_drop_data_fw(position: Vector2, drag_data: Variant) -> bool:
 	return true
 
 # 执行放置操作
-func _drop_data_fw(position: Vector2, drag_data: Variant) -> void:
+func _drop_data_fw(_position: Vector2, drag_data: Variant) -> void:
 	if typeof(drag_data) != TYPE_DICTIONARY:
 		return
 	
@@ -803,7 +802,7 @@ func _drop_data_fw(position: Vector2, drag_data: Variant) -> void:
 		if data and data.node == dragged_node:
 			was_collapsed = selected_item.collapsed
 	
-	var target_item: TreeItem = get_item_at_position(position)
+	var target_item: TreeItem = get_item_at_position(_position)
 	if !target_item:
 		return
 	
@@ -812,14 +811,14 @@ func _drop_data_fw(position: Vector2, drag_data: Variant) -> void:
 		return
 	
 	var target_node: Node = target_data.node
-	var section: int = get_drop_section_at_position(position)
+	var section: int = get_drop_section_at_position(_position)
 	
 	var old_parent: Node = dragged_node.get_parent()
 	# 再次检查父节点是否有效
 	if !is_instance_valid(old_parent):
 		return
 	
-	var old_index: int = dragged_node.get_index()
+	# var old_index: int = dragged_node.get_index()
 	
 	# 保存世界坐标信息
 	var world_transform_2d: Transform2D
@@ -827,7 +826,7 @@ func _drop_data_fw(position: Vector2, drag_data: Variant) -> void:
 	var world_position: Vector2
 	var has_2d_transform: bool = false
 	var has_3d_transform: bool = false
-	var has_canvas_layer: bool = false
+	# var has_canvas_layer: bool = false
 	
 	if dragged_node is Node2D:
 		world_transform_2d = dragged_node.global_transform
@@ -838,8 +837,8 @@ func _drop_data_fw(position: Vector2, drag_data: Variant) -> void:
 	elif dragged_node is Node3D:
 		world_transform_3d = dragged_node.global_transform
 		has_3d_transform = true
-	elif dragged_node is CanvasLayer:
-		has_canvas_layer = true
+	# elif dragged_node is CanvasLayer:
+		# has_canvas_layer = true
 	
 	# 计算目标索引
 	var target_parent: Node = null

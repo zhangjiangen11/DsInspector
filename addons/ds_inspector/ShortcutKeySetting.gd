@@ -258,7 +258,7 @@ func _setup_dialog():
 	shortcut_dialog.confirmed.connect(_on_dialog_confirmed)
 	shortcut_dialog.canceled.connect(_on_dialog_canceled)
 
-func _on_shortcut_btn_pressed(shortcut_name: String, display_name: String):
+func _on_shortcut_btn_pressed(shortcut_name: String, _display_name: String):
 	_current_shortcut_name = shortcut_name
 	_recorded_keycode = 0
 	_recorded_ctrl = false

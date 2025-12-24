@@ -69,8 +69,8 @@ class DictWrapper:
 		var original_key = key_map.get(str(key), key)
 		dict[original_key] = value
 
-func set_debug_tool(debug_tool: CanvasLayer):
-	self.debug_tool = debug_tool
+func set_debug_tool(_debug_tool: CanvasLayer):
+	debug_tool = _debug_tool
 
 func _ready():
 	prev_btn.text = debug_tool.local.get_str("previous_page")
@@ -154,9 +154,9 @@ func set_value(value):
 # 更新按钮状态和显示文本
 func _update_button_state():
 	if _value != null:
-		var size = _value.size()
-		expand_btn.text = "Dictionary[%d]" % size
-		expand_btn.disabled = size == 0
+		var dict_size = _value.size()
+		expand_btn.text = "Dictionary[%d]" % dict_size
+		expand_btn.disabled = dict_size == 0
 	else:
 		expand_btn.text = "Dictionary[null]"
 		expand_btn.disabled = true

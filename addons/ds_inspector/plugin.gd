@@ -276,7 +276,7 @@ func _open_script_in_editor(script_path: String):
 	print("DsInspector: Request to open script: ", script_path)
 
 func _do_open_script(script: Script):
-	get_editor_interface().edit_resource(script)
+	EditorInterface.edit_resource(script)
 	_focus_editor_window()
 
 ## 在编辑器中打开场景
@@ -292,12 +292,12 @@ func _open_scene_in_editor(scene_path: String):
 	print("DsInspector: Request to open scene: ", scene_path)
 
 func _do_open_scene(scene_path: String):
-	get_editor_interface().open_scene_from_path(scene_path)
+	EditorInterface.open_scene_from_path(scene_path)
 	_focus_editor_window()
 
 ## 尝试让编辑器窗口获得焦点
 func _focus_editor_window():
-	var base_control = get_editor_interface().get_base_control()
+	var base_control = EditorInterface.get_base_control()
 	if base_control:
 		var editor_window = base_control.get_window()
 		if editor_window:

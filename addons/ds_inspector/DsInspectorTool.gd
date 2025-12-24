@@ -234,9 +234,9 @@ func _each_and_check(node: Node, path: String, mouse_position: Vector2, camera: 
 
 	# 保存进入 Viewport 前的状态
 	var is_viewport = node is Viewport and node != _root_viewport
-	var original_mouse_position = mouse_position
-	var original_camera = camera
-	var original_in_canvaslayer = in_canvaslayer
+	# var original_mouse_position = mouse_position
+	# var original_camera = camera
+	# var original_in_canvaslayer = in_canvaslayer
 	
 	if is_viewport:
 		mouse_position = node.get_mouse_position()
@@ -301,12 +301,12 @@ func is_polygon_node_coll(node: Node2D, in_canvaslayer: bool, mouse_position: Ve
 	return false
 
 ## 旋转矩形检测
-func is_in_rotated_rect(mouse_pos: Vector2, rect: Rect2, rotation: float, offset: Vector2) -> bool:
+func is_in_rotated_rect(mouse_pos: Vector2, rect: Rect2, _rotation: float, _offset: Vector2) -> bool:
 	# 计算旋转中心点（世界坐标）
-	var pivot = rect.position + offset
+	var pivot = rect.position + _offset
 	
 	# 将 mouse_pos 转换到矩形局部坐标系（反向旋转）
-	var local_pos = (mouse_pos - pivot).rotated(-rotation)
+	var local_pos = (mouse_pos - pivot).rotated(-_rotation)
 	
 	# 处理负尺寸：计算实际位置和尺寸
 	var actual_position = rect.position
@@ -362,8 +362,8 @@ func calc_node_rect(node: Node) -> DsNodeTransInfo:
 		if node is Sprite2D:
 			var texture: Texture2D = node.texture
 			if texture:
-				var scale: Vector2 = node.global_scale
-				var offset: Vector2 = node.offset * scale
+				var _scale: Vector2 = node.global_scale
+				var _offset: Vector2 = node.offset * scale
 				var size: Vector2 = Vector2.ZERO
 				var h = max(1, node.hframes)
 				var v = max(1, node.vframes)
@@ -371,46 +371,46 @@ func calc_node_rect(node: Node) -> DsNodeTransInfo:
 					size = node.region_rect.size
 				else:
 					size = texture.get_size()
-				size = size / Vector2(h, v) * scale
+				size = size / Vector2(h, v) * _scale
 				# 根据 hframes，vframes，region_rect 计算 size
 				if node.centered:
 					pos -= (size * 0.5).rotated(rot)
-				pos += offset.rotated(rot)
+				pos += _offset.rotated(rot)
 				return DsNodeTransInfo.new(pos, size, rot)
 		elif node is AnimatedSprite2D:
 			var sf: SpriteFrames = node.sprite_frames
 			if sf:
 				var curr_texture: Texture2D = sf.get_frame_texture(node.animation, node.frame)
 				if curr_texture:
-					var scale: Vector2 = node.global_scale
-					var size: Vector2 = curr_texture.get_size() * scale
-					var offset: Vector2 = node.offset * scale
+					var _scale: Vector2 = node.global_scale
+					var size: Vector2 = curr_texture.get_size() * _scale
+					var _offset: Vector2 = node.offset * _scale
 					if node.centered:
 						pos -= (size * 0.5).rotated(rot)
-					pos += offset.rotated(rot)
+					pos += _offset.rotated(rot)
 					return DsNodeTransInfo.new(pos, size, rot)
 		elif node is PointLight2D:
 			var texture: Texture2D = node.texture;
 			if texture:
-				var scale: Vector2 = node.global_scale
-				var size: Vector2 = texture.get_size() * scale;
-				var offset: Vector2 = node.offset * scale
+				var _scale: Vector2 = node.global_scale
+				var size: Vector2 = texture.get_size() * _scale
+				var _offset: Vector2 = node.offset * _scale
 				pos += (offset - size * 0.5).rotated(rot)
 				return DsNodeTransInfo.new(pos, size, rot)
 		elif node is TileMap or node.get_class() == "TileMapLayer":
 			var ts: TileSet = node.tile_set;
 			if ts != null:
-				var scale: Vector2 = node.global_scale;
+				var _scale: Vector2 = node.global_scale;
 				var rect: Rect2 = node.get_used_rect()
 				var tile_size: Vector2 = Vector2(ts.tile_size)
-				var size: Vector2 = rect.size * scale * tile_size
-				pos += (rect.position * scale * tile_size).rotated(rot)
+				var size: Vector2 = rect.size * _scale * tile_size
+				pos += (rect.position * _scale * tile_size).rotated(rot)
 				return DsNodeTransInfo.new(pos, size, rot)
 		elif node is BackBufferCopy or node is VisibleOnScreenEnabler2D or node is VisibleOnScreenNotifier2D:
-			var scale: Vector2 = node.global_scale;
+			var _scale: Vector2 = node.global_scale;
 			var rect: Rect2 = node.rect;
-			pos -= (rect.size * 0.5 * scale).rotated(rot)
-			return DsNodeTransInfo.new(pos, rect.size * scale, rot)
+			pos -= (rect.size * 0.5 * _scale).rotated(rot)
+			return DsNodeTransInfo.new(pos, rect.size * _scale, rot)
 		return DsNodeTransInfo.new(pos, Vector2.ZERO, rot)
 	return DsNodeTransInfo.new(Vector2.ZERO, Vector2.ZERO, 0)
 

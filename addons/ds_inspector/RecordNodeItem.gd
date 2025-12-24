@@ -94,22 +94,22 @@ func _on_delete_button_pressed() -> void:
 	delete_requested.emit()
 
 # 判断是否可以接收拖放的数据（转发给父容器RecordContainer）
-func _can_drop_data_fw(position: Vector2, drag_data: Variant) -> bool:
+func _can_drop_data_fw(_position: Vector2, drag_data: Variant) -> bool:
 	# 获取RecordContainer（RecordNodeItem的父容器）
 	var parent = get_parent()
 	if parent and parent.has_method("_can_drop_data_fw"):
 		# 将位置转换为父容器的本地坐标
 		# position是相对于当前控件的本地坐标，转换为相对于父容器的坐标
-		var parent_local_pos = position + get_position()
+		var parent_local_pos = _position + get_position()
 		return parent._can_drop_data_fw(parent_local_pos, drag_data)
 	return false
 
 # 执行拖放操作（转发给父容器RecordContainer）
-func _drop_data_fw(position: Vector2, drag_data: Variant) -> void:
+func _drop_data_fw(_position: Vector2, drag_data: Variant) -> void:
 	# 获取RecordContainer（RecordNodeItem的父容器）
 	var parent = get_parent()
 	if parent and parent.has_method("_drop_data_fw"):
 		# 将位置转换为父容器的本地坐标
 		# position是相对于当前控件的本地坐标，转换为相对于父容器的坐标
-		var parent_local_pos = position + get_position()
+		var parent_local_pos = _position + get_position()
 		parent._drop_data_fw(parent_local_pos, drag_data)

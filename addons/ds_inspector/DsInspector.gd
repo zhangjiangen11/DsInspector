@@ -49,7 +49,7 @@ func _setup_http_client():
 	http_client.request_completed.connect(_on_http_request_completed)
 
 ## HTTP请求完成回调
-func _on_http_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray):
+func _on_http_request_completed(result: int, response_code: int, _headers: PackedStringArray, _body: PackedByteArray):
 	if result != HTTPRequest.RESULT_SUCCESS:
 		print("DsInspector: HTTP请求失败，错误代码: ", result)
 		return

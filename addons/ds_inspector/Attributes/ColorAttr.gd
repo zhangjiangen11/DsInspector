@@ -44,7 +44,7 @@ func _ready():
 	color_picker.pressed.connect(_on_picker_pressed)
 	pass
 
-func set_node(node, inspector_container = null):
+func set_node(node, _inspector_container = null):
 	_node = node
 
 func set_attr_name(attr_name: String):

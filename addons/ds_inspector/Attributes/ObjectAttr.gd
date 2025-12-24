@@ -24,8 +24,8 @@ var _value  # 当前Object的值
 var _is_expanded: bool = false
 var _is_initialized: bool = false  # 是否已经初始化过子字段
 
-func set_debug_tool(debug_tool: CanvasLayer):
-	self.debug_tool = debug_tool
+func set_debug_tool(_debug_tool: CanvasLayer):
+	debug_tool = _debug_tool
 
 func _ready():
 	junp_button.tooltip_text = debug_tool.local.get_str("jump_to_node")

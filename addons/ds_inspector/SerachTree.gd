@@ -8,10 +8,10 @@ var node_tree_path: NodePath
 var _script_icon: Texture = preload("res://addons/ds_inspector/icon/icon_script.svg")
 @onready
 var _scene_icon: Texture = preload("res://addons/ds_inspector/icon/icon_play_scene.svg")
-@onready
-var _visible_icon: Texture = preload("res://addons/ds_inspector/icon/Visible.png")
-@onready
-var _hide_icon: Texture = preload("res://addons/ds_inspector/icon/Hide.png")
+# @onready
+# var _visible_icon: Texture = preload("res://addons/ds_inspector/icon/Visible.png")
+# @onready
+# var _hide_icon: Texture = preload("res://addons/ds_inspector/icon/Hide.png")
 
 @onready
 var node_tree: DsNodeTree = get_node(node_tree_path)

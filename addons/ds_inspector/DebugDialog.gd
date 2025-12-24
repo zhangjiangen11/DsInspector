@@ -35,9 +35,6 @@ var play_icon: Texture2D = preload("res://addons/ds_inspector/icon/Play.svg")
 @onready
 var pause_icon: Texture2D = preload("res://addons/ds_inspector/icon/Pause.svg")
 
-# 记录的坐标
-var _pre_pos: Vector2
-
 var _next_frame_paused_index: int = 0
 
 func _ready():
@@ -91,7 +88,7 @@ func _on_language_changed():
 	confirmation.cancel_button_text = debug_tool.local.get_str("cancel")
 	pass
 
-func _process(delta):
+func _process(_delta):
 	if _next_frame_paused_index > 0:
 		_next_frame_paused_index -= 1
 		if _next_frame_paused_index == 0:
@@ -216,10 +213,10 @@ func save_node_as_scene(node: Node, path: String) -> void:
 	node.owner = o
 
 
-func _recursion_set_owner(node: Node, owner: Node):
+func _recursion_set_owner(node: Node, _owner: Node):
 	for ch in node.get_children(true):
-		ch.owner = owner
-		_recursion_set_owner(ch, owner)
+		ch.owner = _owner
+		_recursion_set_owner(ch, _owner)
 
 # 当窗口大小改变时保存状态
 func _on_window_resized():

@@ -37,11 +37,11 @@ func set_auto_search_enabled(enabled: bool) -> void:
 	auto_search_enabled = enabled
 	search_btn.visible = !enabled
 
-func _do_text_changed(new_text: String):
+func _do_text_changed(_new_text: String):
 	if auto_search_enabled:
 		_do_serach()
 
-func _do_text_submitted(text: String):
+func _do_text_submitted(_text: String):
 	_do_serach()
 	pass
 

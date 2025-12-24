@@ -36,7 +36,7 @@ var record_container: Control
 func _ready():
 	pass
 
-func _process(delta: float):
+func _process(_delta: float):
 	# 检查是否正在录制快捷键
 	if shortcut_key_setting and shortcut_key_setting.is_recording():
 		return

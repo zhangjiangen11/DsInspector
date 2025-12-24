@@ -28,8 +28,8 @@ func _on_pressed():
 	is_expand = !is_expand
 	_set_expand_state(is_expand)
 
-func _set_expand_state(is_expand: bool):
-	if is_expand:
+func _set_expand_state(_is_expand: bool):
+	if _is_expand:
 		icon = expand_icon_tex
 		record_root.custom_minimum_size.y = 200
 		vsc.split_offset = 200

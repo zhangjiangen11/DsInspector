@@ -72,7 +72,7 @@ func _ready():
 		server_port_container.get_parent().visible = false
 
 	# 访问 Localization.gd
-	var local = debug_tool.local
+	# var local = debug_tool.local
 	# 需要初始化 local_option 中的语言
 	_init_language_options()
 
@@ -157,7 +157,7 @@ func _update_server_port_visibility():
 	var enabled = debug_tool.save_config.get_enable_server()
 	server_port_container.visible = enabled
 
-func _on_server_port_submitted(text: String):
+func _on_server_port_submitted(_text: String):
 	_save_server_port()
 
 func _on_server_port_focus_exited():

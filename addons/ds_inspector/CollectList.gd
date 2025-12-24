@@ -107,7 +107,7 @@ func _gui_input(event: InputEvent) -> void:
                     _jump_to_node(path)
     pass
 
-func _on_button_pressed(item: TreeItem, column: int, id: int, mouse_button_index: int):
+func _on_button_pressed(item: TreeItem, _column: int, _id: int, _mouse_button_index: int):
     _is_button_clicked = true  # 标记刚刚点击了按钮
     var s: String = item.get_text(0)
     item.free()
@@ -140,9 +140,9 @@ func _jump_to_node(path: String) -> void:
         # 如果路径以子节点名称开头，尝试从该子节点查找
         if path.begins_with(child.name + "/"):
             var sub_path: String = path.substr(child.name.length() + 1)
-            var test_node: Node = child.get_node_or_null(NodePath(sub_path))
-            if test_node != null and is_instance_valid(test_node):
-                node = test_node
+            var test_node2: Node = child.get_node_or_null(NodePath(sub_path))
+            if test_node2 != null and is_instance_valid(test_node2):
+                node = test_node2
                 break
         
         # 尝试直接使用完整路径查找

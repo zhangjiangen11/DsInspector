@@ -332,26 +332,26 @@ func calc_node_trans(node: Node) -> DsViewportTransInfo:
 		camera = viewport.get_camera_2d()
 	var node_trans: DsNodeTransInfo = debug_tool.calc_node_rect(node)
 	var view_trans: DsViewportTransInfo = DsViewportTransInfo.new()
-	var scale: Vector2 = Vector2.ONE
+	var tr_scale: Vector2 = Vector2.ONE
 
 	if node is CollisionShape2D:
-		scale = node.global_scale
+		tr_scale = node.global_scale
 	elif node is CollisionPolygon2D or node is Polygon2D:
-		scale = node.global_scale
+		tr_scale = node.global_scale
 	elif node is LightOccluder2D:
 		if node.occluder != null:
-			scale = node.global_scale
+			tr_scale = node.global_scale
 
 	if in_canvaslayer:
 		view_trans.position = node_trans.position
 		view_trans.rotation = node_trans.rotation
-		view_trans.scale = scale
+		view_trans.scale = tr_scale
 		view_trans.size = node_trans.size
 	else:
 		var camera_trans: DsCameraTransInfo = debug_tool.get_camera_trans(camera)
 		view_trans.position = debug_tool.scene_to_ui(node_trans.position, camera)
 		view_trans.rotation = node_trans.rotation - camera_trans.rotation
-		view_trans.scale = camera_trans.zoom * scale
+		view_trans.scale = camera_trans.zoom * tr_scale
 		view_trans.size = node_trans.size
 	return view_trans
 
@@ -364,15 +364,15 @@ func find_viewport_node(node: Node) -> Viewport:
 		curr_node = curr_node.get_parent()
 	return null
 
-func _draw_node_shape(brush_node: CanvasItem, shape: Shape2D, pos: Vector2, scale: Vector2, rot: float):
+func _draw_node_shape(brush_node: CanvasItem, shape: Shape2D, pos: Vector2, tr_scale: Vector2, rot: float):
 	var wscale: float = get_viewport_wscale()
 	brush_node.draw_circle(pos, 3 * wscale, Color(1, 0, 0))
 	if shape != null:
-		brush_node.draw_set_transform(pos, rot, scale)
+		brush_node.draw_set_transform(pos, rot, tr_scale)
 		shape.draw(brush_node.get_canvas_item(), Color(0, 1, 1, 0.5))
 		brush_node.draw_set_transform(Vector2.ZERO, 0, Vector2.ZERO)
 
-func _draw_node_polygon(brush_node: CanvasItem, polygon: PackedVector2Array, pos: Vector2, scale: Vector2, rot: float):
+func _draw_node_polygon(brush_node: CanvasItem, polygon: PackedVector2Array, pos: Vector2, tr_scale: Vector2, rot: float):
 	var wscale: float = get_viewport_wscale()
 	brush_node.draw_circle(pos, 3 * wscale, Color(1, 0, 0))
 	if polygon != null and polygon.size() > 0:
@@ -380,24 +380,24 @@ func _draw_node_polygon(brush_node: CanvasItem, polygon: PackedVector2Array, pos
 		var arr: Array[Vector2] = []
 		arr.append_array(polygon)
 		arr.append(polygon[0])
-		brush_node.draw_set_transform(pos, rot, scale)
+		brush_node.draw_set_transform(pos, rot, tr_scale)
 		# 画填充多边形
 		brush_node.draw_polygon(polygon, [Color(1, 0, 0, 0.3)])  # 半透明红色
 		brush_node.draw_polyline(arr, Color(1, 0, 0), 2.0 * wscale)  # 闭合线
 		brush_node.draw_set_transform(Vector2.ZERO, 0, Vector2.ZERO)
 
-func _draw_node_rect(brush_node: CanvasItem, pos: Vector2, scale: Vector2, size: Vector2, rot: float, filled: bool):
+func _draw_node_rect(brush_node: CanvasItem, pos: Vector2, tr_scale: Vector2, size: Vector2, rot: float, filled: bool):
 	var wscale: float = get_viewport_wscale()
 	brush_node.draw_circle(pos, 3 * wscale, Color(1, 0, 0))
 	if size == Vector2.ZERO:
 		return
 	# 设置绘制变换
-	brush_node.draw_set_transform(pos, rot, scale)
+	brush_node.draw_set_transform(pos, rot, tr_scale)
 	# 绘制矩形
 	var rect = Rect2(Vector2.ZERO, size)
 	if filled:
 		brush_node.draw_rect(rect, Color(1,0,0,0.3), true)
-	brush_node.draw_rect(rect, Color(1,0,0), false, 1 / scale.x * 2 * wscale)
+	brush_node.draw_rect(rect, Color(1,0,0), false, 1 / tr_scale.x * 2 * wscale)
 	# 重置变换
 	brush_node.draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
 
