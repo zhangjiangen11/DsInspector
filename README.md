@@ -7,15 +7,19 @@ It provides functionality similar to the built-in Editor Inspector, making debug
 
 ![screenshot](addons/ds_inspector/icon/Icon.png)
 
+Author's bilibili homepage: https://space.bilibili.com/259437820
+
 ## Features
 
-* **Real-time Node Tree View**: Displays all nodes in the currently running scene. (Only supports 2D scene inspection; 3D scenes are not supported.)
-* **Node Property Inspection**: View and modify node property values (including script-exported variables). Changes take effect immediately.
+* **Real-time Node Tree View**: Displays all nodes in the currently running scene, allows dragging nodes to move positions. (Only supports 2D scene inspection; 3D scenes are not supported.)
+* **Node Property Inspection**: View and modify node property values (including script-exported variables). Changes take effect immediately. Supports property filtering, you can use "|" to split multiple filter conditions.
 * **Node Search**: Quickly find target nodes.
 * **Node Selection Highlight**: Locate the selected node in the game viewport.
   When "Pick Node" is enabled, click on an element in the scene to select it.
   If elements overlap, repeatedly clicking cycles through them.
-* **Exclude Paths**: Filter out specific node paths to help focus on target nodes more easily.
+* **Record Node Instances**: Drag nodes to the record area, click recorded nodes to quickly jump. Temporarily records nodes, when nodes are destroyed the records are removed.
+* **Favorite Paths**: Favorite specified paths, permanently saved, click to jump to the node at that path.
+* **Exclude Paths**: Filter out specific node paths, permanently saved, nodes under these paths will not be selected when picking.
 * **Frame-by-Frame Execution**: Pause the game and advance it one frame at a time.
 * **Open Script/Scene Path**: In the property panel, quickly open the associated script or locate the scene file in the file explorer—making it easy to jump to source files.
 * **Save Node as Scene**: Export and save the selected node as a new scene (e.g. `.tscn`), useful for reuse or sharing.
@@ -25,6 +29,7 @@ It provides functionality similar to the built-in Editor Inspector, making debug
   The plugin automatically recognizes C# scripts and `[export]` attributes—no extra configuration needed.
 * **Run in Godot Editor**: Allows the plugin to run inside the Godot Editor itself, enabling real-time inspection of internal editor nodes.
   This is especially helpful for developing editor plugins (feature not supported in the 3.x version).
+* **Multi-language Support**: Can be switched in settings, currently supported languages include: Simplified Chinese (zh), Traditional Chinese (zh_tw), English (en), Spanish (es), Japanese (ja), Russian (ru).
 
 ## Supported Versions
 
@@ -36,7 +41,7 @@ For Godot 3.x, please use this repository instead:
 
 ## Installation
 
-1. Clone this repository and copy the `addons/` folder into your project’s `addons/` directory.
+1. Clone this repository and copy the `addons/` folder into your project's `addons/` directory.
 2. Enable the plugin in your `project.godot` settings:
 
    * Open **Project > Project Settings > Plugins**
@@ -44,43 +49,37 @@ For Godot 3.x, please use this repository instead:
 3. After running the game, a floating window will appear. Click the window to open the inspector.
 4. You can also enable or disable the plugin for the editor or the game from **Project → Tools → DsInspector**.
 
-![image-20251014202144790](docs/image-20251014202144790.png)
-
-If you prefer the plugin to use a **native OS window**, add the following line when starting the game:
-
-```gdscript
-get_viewport().gui_embed_subwindows = false
-```
+![image4](docs/image4.png)
 
 ## Preview
 
-Pick objects directly in the scene:
+Inspector window:
 
-![preview](docs/preview.gif)
+![img1](docs/img1.png)
 
-Inspect Godot editor nodes:
+![img2](docs/img2.png)
 
-![image-20251014204751994](do c simage-20251014204751994.png)
+Pick objects in the scene:
 
-Display collision shapes:
+![img3](docs/img3.png)
 
-![2025-09-22\_014424](docs/2025-09-22_014424.png)
+![preview2](docs/preview2.gif)![preview](docs/preview.gif)
 
-Display textures:
+Pick Godot editor nodes:
 
-![2025-09-22\_015110](docs/2025-09-22_015110.png)
+![preview3](docs/preview3.gif)
 
 ## C# Projects
 
 In C# projects, you can use the following wrapper class to conveniently add **cheat buttons**.
 
-```csharp
+```c#
 using Godot;
 
 /// <summary>
 /// Provides static methods for interacting with the DsInspector singleton,
 /// allowing you to add cheat/debug buttons.
-/// This class must be initialized after the SceneTree is created
+/// This class needs to be initialized after SceneTree initialization
 /// by calling the <see cref="Init(SceneTree)"/> method.
 /// </summary>
 public static class CheatManager
@@ -89,7 +88,7 @@ public static class CheatManager
     private static Node _dsInspector;
 
     /// <summary>
-    /// Initializes the CheatManager with a SceneTree instance.
+    /// Initializes CheatManager, passing in a SceneTree instance
     /// </summary>
     public static void Init(SceneTree tree)
     {
@@ -110,7 +109,7 @@ public static class CheatManager
     }
 
     /// <summary>
-    /// Adds a cheat button to DsInspector by invoking the GDScript singleton method.
+    /// Adds a cheat button to DsInspector by calling the GDScript singleton method.
     /// </summary>
     public static void AddCheatButton(string title, Node target, string method)
     {
