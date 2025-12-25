@@ -302,10 +302,8 @@ func _focus_editor_window():
 	if base_control:
 		var editor_window = base_control.get_window()
 		if editor_window:
-			# 尝试让窗口获得焦点
-			editor_window.grab_focus()
 			# 如果窗口被最小化，恢复它
 			if editor_window.mode == Window.MODE_MINIMIZED:
 				editor_window.mode = Window.MODE_WINDOWED
 			# 将窗口移到最前面
-			editor_window.move_to_foreground()
+			editor_window.grab_focus()
