@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 DsInspector="*res://addons/ds_inspector/DsInspector.gd"
 
+[debug]
+
+gdscript/warnings/exclude_addons=false
+
 [display]
 
 window/size/viewport_width=1920
@@ -32,3 +36,7 @@ project/assembly_name="DsInspector"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/ds_inspector/plugin.cfg")
+
+[physics]
+
+2d/run_on_separate_thread=true

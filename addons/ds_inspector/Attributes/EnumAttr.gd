@@ -1,38 +1,33 @@
 @tool
-extends BaseAttr
-class_name EnumAttr
+extends OptionButton
 
-@export
-var label: Label
-@export
-var option_button: OptionButton
+var type: String = "enum"
 
 var _attr: String
-var _node: Node
+var _node  # Node或其他Object
 
 func _ready():
-	option_button.item_selected.connect(_on_item_selected)
+	item_selected.connect(_on_item_selected)
 	pass
 
-func set_node(node: Node):
+func set_node(node, _inspector_container = null):
 	_node = node
 
 func set_enum_options(options: String):
-	option_button.clear()
+	clear()
 	var opts = options.split(",")
 	for i in opts.size():
-		option_button.add_item(opts[i])
+		add_item(opts[i])
 	pass
 
-func set_title(name: String):
-	_attr = name
-	label.text = name
+func set_attr_name(attr_name: String):
+	_attr = attr_name
 
 func set_value(value):
 	if not value is int:
 		return
-	if not option_button.has_focus():
-		option_button.select(value)
+	if not has_focus():
+		select(value)
 	pass
 
 func _on_item_selected(index: int):

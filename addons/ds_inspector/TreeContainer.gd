@@ -2,49 +2,46 @@
 extends VBoxContainer
 
 @export
-var search_btn_path: NodePath
+var search_btn: Button
 @export
-var clear_search_btn_path: NodePath
+var clear_search_btn: Button
 @export
-var search_input_path: NodePath
+var search_input: LineEdit
 @export
-var node_tree_path: NodePath
+var node_tree: Tree
 @export
-var search_tree_path: NodePath
+var search_tree: Tree
 @export
-var debug_tool_path: NodePath
-
-@onready
-var search_btn: Button = get_node(search_btn_path)
-@onready
-var clear_search_btn: Button = get_node(clear_search_btn_path)
-@onready
-var search_input: LineEdit = get_node(search_input_path)
-@onready
-var node_tree: Tree = get_node(node_tree_path)
-@onready
-var search_tree: Tree = get_node(search_tree_path)
-@onready
-var debug_tool = get_node(debug_tool_path)
+var debug_tool: CanvasLayer
 
 var auto_search_enabled: bool = false
 
 func _ready():
+	debug_tool.local.change_language.connect(_on_language_changed)
+	_on_language_changed()
+
 	search_btn.pressed.connect(_do_serach)
 	clear_search_btn.pressed.connect(_do_clear_serach)
 	search_input.text_submitted.connect(_do_text_submitted)
 	search_input.text_changed.connect(_do_text_changed)
 	pass
 
+func _on_language_changed():
+	search_btn.text = debug_tool.local.get_str("search")
+	clear_search_btn.text = debug_tool.local.get_str("clear")
+	search_input.placeholder_text = debug_tool.local.get_str("please_enter_node_name")
+	pass
+
+
 func set_auto_search_enabled(enabled: bool) -> void:
 	auto_search_enabled = enabled
 	search_btn.visible = !enabled
 
-func _do_text_changed(new_text: String):
+func _do_text_changed(_new_text: String):
 	if auto_search_enabled:
 		_do_serach()
 
-func _do_text_submitted(text: String):
+func _do_text_submitted(_text: String):
 	_do_serach()
 	pass
 

@@ -1,10 +1,6 @@
 @tool
-extends BaseAttr
-class_name RectIAttr
+extends VBoxContainer
 
-
-@export
-var label: Label
 @export
 var x_line_edit: LineEdit
 @export
@@ -14,8 +10,10 @@ var w_line_edit: LineEdit
 @export
 var h_line_edit: LineEdit
 
+var type: String = "recti"
+
 var _attr: String
-var _node: Node
+var _node  # Node或其他Object
 
 var _focus_flag: bool = false
 var _temp_value: Rect2i
@@ -37,12 +35,11 @@ func _ready():
 	h_line_edit.focus_exited.connect(_on_focus_exited)
 	pass
 
-func set_node(node: Node):
+func set_node(node, _inspector_container = null):
 	_node = node
 
-func set_title(name: String):
-	_attr = name
-	label.text = name
+func set_attr_name(attr_name: String):
+	_attr = attr_name
 
 func set_value(value):
 	if not value is Rect2i:

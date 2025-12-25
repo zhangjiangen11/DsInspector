@@ -1,26 +1,21 @@
 @tool
-extends BaseAttr
-class_name TextureAttr
+extends TextureRect
 
-@export
-var label: Label
-@export
-var texture_node: TextureRect
+var type: String = "texture"
 
 var _attr: String
-var _node: Node
+var _node  # Node或其他Object
 
-func set_node(node: Node):
+func set_node(node, _inspector_container = null):
 	_node = node
 
-func set_title(name: String):
-	_attr = name
-	label.text = name
+func set_attr_name(attr_name: String):
+	_attr = attr_name
 
 func set_value(value):
 	if value == null:
-		texture_node.texture = null
+		texture = null
 		return
 	elif not value is Texture:
 		return
-	texture_node.texture = value
+	texture = value

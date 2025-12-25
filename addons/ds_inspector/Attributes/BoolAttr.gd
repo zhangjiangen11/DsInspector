@@ -1,30 +1,25 @@
 @tool
-extends BaseAttr
-class_name BoolAttr
+extends CheckBox
 
-@export
-var label: Label
-@export
-var check_box: CheckBox
+var type: String = "bool"
 
 var _attr: String
-var _node: Node
+var _node  # Node或其他Object
 
 func _ready():
-	check_box.pressed.connect(_on_pressed)
+	pressed.connect(_on_pressed)
 	pass
 
-func set_node(node: Node):
+func set_node(node, _inspector_container = null):
 	_node = node
 
-func set_title(name: String):
-	_attr = name
-	label.text = name
+func set_attr_name(attr_name: String):
+	_attr = attr_name
 
 func set_value(value):
 	if not value is bool:
 		return
-	check_box.button_pressed = value
+	button_pressed = value
 
 func _on_pressed():
-	_node.set(_attr, check_box.button_pressed)
+	_node.set(_attr, button_pressed)
