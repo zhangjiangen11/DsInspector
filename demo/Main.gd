@@ -13,11 +13,13 @@ var ref_node: Node
 @export
 var ref_node2: Node
 
+
 var timer: float = 0.0
 var timer2: float = 0.0
 
 var arr = [1, 2, 3, 4, 5, Color.RED]
 var arr2: Array[int] = [1, 2, 3, 4, 5]
+var packV2Arr: PackedVector2Array = PackedVector2Array()
 var data = TestData.new()
 var data2 = null
 var data3 = null
@@ -51,6 +53,8 @@ func _ready():
 	for i in range(30):
 		arr2.push_back(i)
 		data4[i] = false
+	packV2Arr.append(Vector2.ONE)
+	packV2Arr.append(Vector2.UP)
 	pass
 
 func _on_cheat_button_pressed():

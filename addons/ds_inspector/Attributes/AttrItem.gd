@@ -157,6 +157,34 @@ func _create_attr_for_value(value, prop: Dictionary):
 					attr = _inspector_container.string_attr.instantiate()
 				TYPE_ARRAY:
 					attr = _inspector_container.array_attr.instantiate()
+					attr.type_name = "Array"
+				TYPE_PACKED_BYTE_ARRAY:
+					attr = _inspector_container.array_attr.instantiate()
+					attr.type_name = "PackedByteArray"
+				TYPE_PACKED_INT32_ARRAY:
+					attr = _inspector_container.array_attr.instantiate()
+					attr.type_name = "PackedInt32Array"
+				TYPE_PACKED_INT64_ARRAY:
+					attr = _inspector_container.array_attr.instantiate()
+					attr.type_name = "PackedInt64Array"
+				TYPE_PACKED_FLOAT32_ARRAY:
+					attr = _inspector_container.array_attr.instantiate()
+					attr.type_name = "PackedFloat32Array"
+				TYPE_PACKED_FLOAT64_ARRAY:
+					attr = _inspector_container.array_attr.instantiate()
+					attr.type_name = "PackedFloat64Array"
+				TYPE_PACKED_STRING_ARRAY:
+					attr = _inspector_container.array_attr.instantiate()
+					attr.type_name = "PackedStringArray"
+				TYPE_PACKED_VECTOR2_ARRAY:
+					attr = _inspector_container.array_attr.instantiate()
+					attr.type_name = "PackedVector2Array"
+				TYPE_PACKED_VECTOR3_ARRAY:
+					attr = _inspector_container.array_attr.instantiate()
+					attr.type_name = "PackedVector3Array"
+				TYPE_PACKED_COLOR_ARRAY:
+					attr = _inspector_container.array_attr.instantiate()
+					attr.type_name = "PackedColorArray"
 				TYPE_DICTIONARY:
 					attr = _inspector_container.map_attr.instantiate()
 				TYPE_OBJECT:

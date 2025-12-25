@@ -26,10 +26,12 @@ var debug_tool: CanvasLayer
 
 var type: String = "array"
 
+var type_name: String = "Array"  # 类型名称
+
 var _node  # 父对象（可能是Node，也可能是其他Object）
 var _inspector_container
 var _attr: String
-var _value: Array  # 当前Array的值
+var _value  # 当前Array的值
 var _array_wrapper: ArrayWrapper  # 数组包装器，用于支持set/get操作
 
 var _is_expanded: bool = false
@@ -41,9 +43,9 @@ var _total_pages: int = 0   # 总页数
 
 # 数组包装器类，用于让数组支持字符串索引的get/set操作
 class ArrayWrapper:
-	var array: Array
+	var array
 	
-	func _init(arr: Array):
+	func _init(arr):
 		array = arr
 	
 	@warning_ignore("native_method_override")
@@ -142,10 +144,10 @@ func set_value(value):
 func _update_button_state():
 	if _value != null:
 		var _size = _value.size()
-		expand_btn.text = "Array[%d]" % _size
+		expand_btn.text = type_name + ("[%d]" % _size)
 		expand_btn.disabled = _size == 0
 	else:
-		expand_btn.text = "Array[null]"
+		expand_btn.text = type_name + "[null]"
 		expand_btn.disabled = true
 	pass
 
